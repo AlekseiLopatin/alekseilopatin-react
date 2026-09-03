@@ -1,0 +1,137 @@
+.currency-select {
+  position: relative;
+  min-width: 0;
+}
+
+.currency-select-label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.currency-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-3);
+  color: var(--color-text);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.currency-select-trigger:hover,
+.currency-select-trigger[aria-expanded='true'] {
+  border-color: var(--color-accent);
+}
+
+.currency-select-code {
+  font-family: var(--font-mono);
+}
+
+.currency-select-caret {
+  margin-left: auto;
+  color: var(--color-text-faint);
+}
+
+/* Флаг с рамкой — иначе белые полосы (Япония, Польша)
+   сливаются со светлой темой и флаг выглядит обрезанным. */
+.flag {
+  display: block;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+
+/* --- Выпадающая панель --- */
+.currency-select-panel {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  right: 0;
+  min-width: 240px;
+  padding: var(--space-2);
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.currency-select-search {
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.currency-select-search:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.currency-select-list {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-top: var(--space-2);
+  list-style: none;
+}
+
+.currency-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  padding: var(--space-2);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.currency-option:hover,
+.currency-option:focus-visible {
+  color: var(--color-text);
+  background: var(--color-accent-muted);
+}
+
+/* Выбранная валюта помечена и цветом, и жирностью акцентного кода. */
+.currency-option.is-selected {
+  color: var(--color-text);
+  background: var(--color-accent-muted);
+}
+
+.currency-option.is-selected .currency-select-code {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.currency-option-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-text-faint);
+}
+
+.currency-select-empty {
+  padding: var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}

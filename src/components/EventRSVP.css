@@ -1,0 +1,106 @@
+.rsvp {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.rsvp-title {
+  font-size: var(--text-xl);
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.rsvp-form label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-top: var(--space-3);
+}
+
+.rsvp-form input[type='text'],
+.rsvp-form input[type='email'],
+.rsvp-form input[type='number'] {
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-3);
+  color: var(--color-text);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition);
+}
+
+.rsvp-form input:focus {
+  border-color: var(--color-accent);
+}
+
+/* Чекбокс и его подпись в одну строку: подпись оборачивает
+   инпут, поэтому клик по тексту тоже переключает галку. */
+/* .rsvp-form label выигрывает по специфичности (0,1,1 против 0,1,0),
+   поэтому селектор здесь тоже двойной, иначе капс не сбросить. */
+.rsvp-form label.rsvp-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.rsvp-checkbox input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.rsvp-form button {
+  font: inherit;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-6);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.rsvp-form button:hover {
+  background: var(--color-accent-hover);
+}
+
+.rsvp-confirmation {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--color-accent);
+}
+
+.rsvp-confirmation h3 {
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.rsvp-confirmation p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}

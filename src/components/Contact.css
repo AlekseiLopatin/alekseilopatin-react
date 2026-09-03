@@ -1,0 +1,74 @@
+.contact {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: var(--space-24) 0;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+}
+
+.contact-intro {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.contact-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.contact-email a {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+}
+
+.contact-email a:hover {
+  color: var(--color-accent-hover);
+}
+
+.contact-copy {
+  font: inherit;
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition);
+}
+
+.contact-copy:hover {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  list-style: none;
+}
+
+.contact-links a {
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid transparent;
+  padding-bottom: var(--space-1);
+}
+
+.contact-links a:hover {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}

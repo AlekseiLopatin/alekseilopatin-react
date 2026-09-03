@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 460px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+#otp-title {
+  font-size: var(--text-xl);
+  letter-spacing: 0.02em;
+}
+
+/* Код — моноширинным с разрядкой, чтобы цифры не слипались
+   и не прыгали по ширине при смене значения. */
+.otp-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  color: var(--color-accent);
+}
+
+.otp-hint {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+
+/* min-height держит место под сообщение, пока оно пустое,
+   иначе кнопка подпрыгивает после первого клика. */
+.otp-timer {
+  min-height: 1.5em;
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+#generate-otp-button {
+  font: inherit;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-8);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+#generate-otp-button:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Отключённая кнопка отличается и прозрачностью, и курсором —
+   одного цвета мало, если пользователь его не различает. */
+#generate-otp-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

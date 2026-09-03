@@ -1,0 +1,56 @@
+/* Фон задаётся инлайном из состояния, здесь только геометрия.
+   background: #fff в CSS не пишем — иначе он поборется с инлайном. */
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  /* Текст внутри — всегда тёмный: подложка светлая по умолчанию
+     и произвольная после выбора, поэтому опираться на тему нельзя. */
+  color: #141210;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.color-picker-title {
+  font-size: var(--text-lg);
+  color: inherit;
+}
+
+/* Нативный color input выглядит по-разному в каждом браузере,
+   поэтому убираем рамку и делаем из него большой круг-образец. */
+#color-input {
+  width: 96px;
+  height: 96px;
+  padding: 0;
+  border: 3px solid rgba(20, 18, 16, 0.25);
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+
+#color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+#color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+#color-input::-moz-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
+.color-picker-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  color: inherit;
+}

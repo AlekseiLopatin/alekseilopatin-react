@@ -1,0 +1,147 @@
+/* ============================================================
+   REFINED EMBER — Brand System v2 (React)
+   Aleksei Lopatin · alekseilopatin.com
+
+   Три темы. Каждая переопределяет ТОЛЬКО цвета —
+   шрифты, отступы и радиусы общие для всех.
+   ============================================================ */
+
+/* ---------- EMBER (тёмная, основная) ---------- */
+:root,
+:root[data-theme='ember'] {
+  --color-base: #141210;
+  --color-surface: #201c18;
+  --color-elevated: #2c2620;
+
+  --color-accent: #d4a44b;
+  --color-accent-hover: #e8b85c;
+  --color-accent-active: #bd8f38;
+  --color-accent-muted: rgba(212, 164, 75, 0.15);
+  --color-on-accent: #141210;
+
+  --color-text: #e8dcc8;
+  --color-text-muted: #b3a290;
+  --color-text-faint: #94867a;
+
+  --color-border: #3a3020;
+  --color-border-accent: rgba(212, 164, 75, 0.25);
+  --color-border-strong: #5a4e42;
+
+  --color-success: #9cba6f;
+  --color-error: #e07a68;
+
+  --color-focus: #e8b85c;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- DAYLIGHT (светлая) ---------- */
+:root[data-theme='daylight'] {
+  --color-base: #faf6ee;
+  --color-surface: #f2ebdd;
+  --color-elevated: #fffdf8;
+
+  --color-accent: #8a6212;
+  --color-accent-hover: #6d4c0c;
+  --color-accent-active: #573c08;
+  --color-accent-muted: rgba(138, 98, 18, 0.12);
+  --color-on-accent: #fffdf8;
+
+  --color-text: #221d17;
+  --color-text-muted: #574c3f;
+  --color-text-faint: #6b5f51;
+
+  --color-border: #ddd2be;
+  --color-border-accent: rgba(138, 98, 18, 0.3);
+  --color-border-strong: #b3a48c;
+
+  --color-success: #4a6b22;
+  --color-error: #a8331f;
+
+  --color-focus: #8a6212;
+  --shadow-sm: 0 1px 3px rgba(60, 45, 20, 0.12);
+  --shadow-md: 0 4px 12px rgba(60, 45, 20, 0.18);
+}
+
+/* ---------- TWILIGHT (сумерки) ----------
+   Холодный сине-серый грейд: дождливый Форкс,
+   лунное серебро вместо золота.
+
+   Colorblind-friendly: вся палитра лежит на одной сине-жёлтой оси,
+   красно-зелёной пары нет вообще — значит дейтеранопия и протанопия
+   (~8% мужчин) её не ломают. Success/error различаются не только
+   тоном, но и светлотой, поэтому читаются даже в ч/б. */
+:root[data-theme='twilight'] {
+  --color-base: #11151c;
+  --color-surface: #191f29;
+  --color-elevated: #232b38;
+
+  --color-accent: #a8c0d4;
+  --color-accent-hover: #c8dcec;
+  --color-accent-active: #8aa3b8;
+  --color-accent-muted: rgba(168, 192, 212, 0.14);
+  --color-on-accent: #11151c;
+
+  --color-text: #dee7ef;
+  --color-text-muted: #a2b2c1;
+  --color-text-faint: #8496a5;
+
+  --color-border: #2b3542;
+  --color-border-accent: rgba(168, 192, 212, 0.25);
+  --color-border-strong: #47596b;
+
+  /* Синий = успех, янтарный = ошибка. Синий/оранжевый — единственная
+     пара, которая различима при всех трёх типах дальтонизма. */
+  --color-success: #a9d6f0;
+  --color-error: #bf821f;
+
+  --color-focus: #c8dcec;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 4px 14px rgba(10, 20, 35, 0.6);
+}
+
+/* ---------- Общее для всех тем ---------- */
+:root {
+  --font-heading: 'Raleway', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Courier New', monospace;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.375rem;
+  --text-2xl: clamp(1.75rem, 1.35rem + 1.7vw, 2.625rem);
+  --text-3xl: clamp(2.25rem, 1.4rem + 3.4vw, 3.75rem);
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  --content-width: 1180px;
+  --nav-height: 4.5rem;
+
+  --focus-ring: 2px solid var(--color-focus);
+  --focus-offset: 3px;
+
+  --transition: 200ms ease;
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 1ms linear;
+  }
+}

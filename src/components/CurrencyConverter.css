@@ -1,0 +1,122 @@
+.converter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 460px;
+  margin: 0 auto;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.converter-title {
+  font-size: var(--text-xl);
+  text-align: center;
+  margin-bottom: var(--space-4);
+}
+
+.converter label {
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.converter input,
+.converter select {
+  font: inherit;
+  font-size: var(--text-sm);
+  width: 100%;
+  padding: var(--space-3);
+  color: var(--color-text);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--transition);
+}
+
+.converter input:focus,
+.converter select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.converter-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.converter-pair label {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
+/* Результат — крупным моноширинным, чтобы цифры не прыгали
+   по ширине при каждом нажатии на клавишу. */
+.converter-result {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  text-align: center;
+  color: var(--color-accent);
+}
+
+/* --- Кнопка обмена валют между селектами --- */
+.converter-pair {
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+}
+
+.converter-field {
+  min-width: 0; /* иначе длинные названия распирают грид */
+}
+
+.converter-swap {
+  font: inherit;
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: var(--space-3);
+  margin-bottom: 1px;
+  color: var(--color-accent);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.converter-swap:hover {
+  color: var(--color-accent-hover);
+  border-color: var(--color-accent);
+  transform: rotate(180deg);
+}
+
+/* --- Курс и статус источника --- */
+.converter-rate {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.converter-status {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  text-align: center;
+  color: var(--color-text-faint);
+}
+
+/* Офлайн помечаем не только цветом, но и текстом выше — 
+   цвет здесь лишь усиливает уже написанное словами. */
+.converter-status.is-offline {
+  color: var(--color-error);
+}

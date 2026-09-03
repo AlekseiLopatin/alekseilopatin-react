@@ -1,0 +1,208 @@
+.projects-board {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.projects-heading {
+  text-align: center;
+}
+
+.projects-subheading {
+  text-align: center;
+  color: var(--color-text-faint);
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
+/* --- Фильтр --- */
+.projects-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: var(--space-8) 0 var(--space-12);
+}
+
+.filter-button {
+  font: inherit;
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.filter-button:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.filter-button[aria-pressed='true'] {
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* --- Сетка --- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* 1fr вместо auto: все ряды одной высоты, даже если
+     где-то заголовок переносится на вторую строку. */
+  grid-auto-rows: 1fr;
+  gap: var(--space-6);
+}
+
+.project-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    border-color var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-accent);
+}
+
+/* --- Картинка и описание поверх неё --- */
+.project-media {
+  position: relative;
+}
+
+/* Пропорции задаём самой картинке, а не контейнеру:
+   height:100% внутри aspect-ratio не резолвится, и картинка
+   раскрывалась в свой натуральный размер. object-fit: cover
+   кадрирует и широкие, и высокие в одну и ту же рамку. */
+.project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: opacity var(--transition);
+}
+
+.project-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  background: linear-gradient(
+    135deg,
+    var(--color-surface) 0%,
+    var(--color-base) 100%
+  );
+}
+
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  text-align: center;
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-text);
+  background: var(--color-base);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+/* Описание показывается и по ховеру, и по фокусу с клавиатуры. */
+.project-card:hover .project-overlay,
+.project-card:focus-visible .project-overlay {
+  opacity: 0.96;
+}
+
+/* --- Подпись --- */
+.project-body {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.project-title {
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.code {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: auto;
+  list-style: none;
+}
+
+.project-tags li {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  color: var(--color-text-muted);
+  background: var(--color-accent-muted);
+  border-radius: var(--radius-sm);
+}
+
+/* --- Пусто по фильтру --- */
+.projects-empty {
+  text-align: center;
+  color: var(--color-text-faint);
+  padding: var(--space-16) 0;
+}
+
+/* --- Показать ещё / свернуть --- */
+.btn-show-all {
+  display: block;
+  margin: var(--space-12) auto 0;
+  font: inherit;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-8);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.btn-show-all:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}

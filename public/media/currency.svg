@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200">
+  <rect width="320" height="200" fill="#141210"/>
+  <circle cx="108" cy="100" r="42" fill="none" stroke="#d4a44b" stroke-width="4"/>
+  <circle cx="212" cy="100" r="42" fill="none" stroke="#d4a44b" stroke-width="4" opacity="0.45"/>
+  <g fill="#e8dcc8" font-family="ui-monospace, monospace" font-size="34" text-anchor="middle">
+    <text x="108" y="113">$</text>
+    <text x="212" y="113" opacity="0.55">€</text>
+  </g>
+  <g stroke="#d4a44b" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M146 88h28"/>
+    <path d="M166 80l8 8-8 8"/>
+    <path d="M174 112h-28"/>
+    <path d="M154 104l-8 8 8 8"/>
+  </g>
+</svg>
