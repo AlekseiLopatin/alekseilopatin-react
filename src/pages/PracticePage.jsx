@@ -3,6 +3,7 @@ import { ColorPicker } from '../components/ColorPicker';
 import { OTPGenerator } from '../components/OTPGenerator';
 import { EventRSVP } from '../components/EventRSVP';
 import { MoodBoard } from '../components/MoodBoard';
+import { Board as TicTacToe } from '../components/TicTacToe';
 import { PageMeta } from '../components/PageMeta';
 import { useLanguage } from '../i18n/LanguageContext';
 import './PracticePage.css';
@@ -42,6 +43,15 @@ const labs = [
       ru: 'отрисовка списка через .map() и ключи',
     },
     Component: MoodBoard,
+  },
+  {
+    id: 'tic-tac-toe',
+    title: 'Tic-Tac-Toe',
+    note: {
+      en: 'derived state, win detection, disabled squares after game over',
+      ru: 'производное состояние, определение победы, блокировка клеток после конца игры',
+    },
+    Component: TicTacToe,
   },
 ];
 

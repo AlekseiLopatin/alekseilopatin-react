@@ -60,6 +60,7 @@ describe('routing', () => {
     expect(screen.getByText(/pick a colour/i)).toBeInTheDocument();
     expect(screen.getAllByText(/otp generator/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/event rsvp/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/tic-tac-toe/i).length).toBeGreaterThan(0);
   });
 
   it('renders the currency page', () => {
