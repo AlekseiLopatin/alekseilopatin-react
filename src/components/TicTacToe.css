@@ -28,6 +28,10 @@
 .ttt-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  /* Без этого строки остаются auto и подстраиваются под контент:
+     пустая кнопка ниже, чем кнопка с крупным глифом X/O, поэтому
+     вся сетка "прыгала" на первом клике по клетке. */
+  grid-template-rows: repeat(3, 1fr);
   gap: var(--space-2);
   width: 100%;
   aspect-ratio: 1 / 1;
