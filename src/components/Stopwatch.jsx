@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Gecko } from './Gecko';
 import './Stopwatch.css';
 
 const pad = (n) => String(n).padStart(2, '0');
@@ -28,7 +29,7 @@ const PRESETS = [1, 5, 15, 30, 60];
    запущенный секундомер обнулялся бы при уходе на вкладку Timer
    и обратно, а в оригинальной ванильной версии оба блока жили
    в DOM постоянно и просто скрывались через display:none. */
-const StopwatchMode = ({ hidden }) => {
+const StopwatchMode = ({ hidden, onRunningChange }) => {
   const [elapsed, setElapsed] = useState(0);
   const [running, setRunning] = useState(false);
   const [history, setHistory] = useState([]);
@@ -44,6 +45,10 @@ const StopwatchMode = ({ hidden }) => {
     }, 10);
     return () => clearInterval(id);
   }, [running]);
+
+  useEffect(() => {
+    onRunningChange(running);
+  }, [running, onRunningChange]);
 
   const toggle = () => {
     if (running) {
@@ -96,7 +101,7 @@ const StopwatchMode = ({ hidden }) => {
   );
 };
 
-const TimerMode = ({ hidden }) => {
+const TimerMode = ({ hidden, onRunningChange }) => {
   const [duration, setDuration] = useState(15 * 60 * 1000);
   const [remaining, setRemaining] = useState(duration);
   const [running, setRunning] = useState(false);
@@ -116,6 +121,10 @@ const TimerMode = ({ hidden }) => {
     }, 250);
     return () => clearInterval(id);
   }, [running]);
+
+  useEffect(() => {
+    onRunningChange(running);
+  }, [running, onRunningChange]);
 
   const toggle = () => {
     if (running) {
@@ -203,6 +212,11 @@ const TimerMode = ({ hidden }) => {
 
 export const Stopwatch = () => {
   const [mode, setMode] = useState('stopwatch');
+  /* Активен, если тикает ЛЮБОЙ из режимов — оба смонтированы
+     постоянно, поэтому секундомер может идти в фоне, пока открыта
+     вкладка Timer, и геккон должен это учитывать. */
+  const [stopwatchRunning, setStopwatchRunning] = useState(false);
+  const [timerRunning, setTimerRunning] = useState(false);
 
   return (
     <div className="stopwatch">
@@ -227,8 +241,10 @@ export const Stopwatch = () => {
         </button>
       </div>
 
-      <StopwatchMode hidden={mode !== 'stopwatch'} />
-      <TimerMode hidden={mode !== 'timer'} />
+      <StopwatchMode hidden={mode !== 'stopwatch'} onRunningChange={setStopwatchRunning} />
+      <TimerMode hidden={mode !== 'timer'} onRunningChange={setTimerRunning} />
+
+      <Gecko active={stopwatchRunning || timerRunning} />
     </div>
   );
 };

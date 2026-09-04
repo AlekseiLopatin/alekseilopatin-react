@@ -1,0 +1,76 @@
+.gecko {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  pointer-events: none;
+  transition: transform 1.8s ease-in-out;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+
+.gecko svg {
+  display: block;
+}
+
+/* Лёгкое покачивание хвоста всегда — геккон "живой" даже стоя. */
+.gecko-tail {
+  transform-origin: 20px 20px;
+  animation: gecko-tail-sway 3.4s ease-in-out infinite;
+}
+
+@keyframes gecko-tail-sway {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+/* Пока ползёт — лапки чуть шевелятся, в противофазе через одну. */
+.gecko-crawl .gecko-legs path {
+  animation: gecko-step 0.4s ease-in-out infinite alternate;
+}
+
+.gecko-crawl .gecko-legs path:nth-child(2n) {
+  animation-delay: 0.2s;
+}
+
+@keyframes gecko-step {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(1.5px);
+  }
+}
+
+/* "Смотрит на пользователя" — тело замирает, глаз изредка моргает. */
+.gecko-look .gecko-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gecko-blink 2.6s ease-in-out infinite;
+}
+
+@keyframes gecko-blink {
+  0%,
+  90%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.15);
+  }
+}
+
+/* "Прячется" у края экрана — тусклее, вполоборота. */
+.gecko-hide {
+  opacity: 0.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gecko {
+    display: none;
+  }
+}
