@@ -39,6 +39,9 @@ export const translations = {
     'meta.ticTacToe.desc': 'X and O with win and draw detection, built in React.',
     'meta.stopwatch.title': 'Stopwatch — Aleksei Lopatin',
     'meta.stopwatch.desc': 'A stopwatch with lap history and a countdown timer, built in React.',
+    'meta.wheel.title': 'Student Picker — Aleksei Lopatin',
+    'meta.wheel.desc':
+      'Six ways to pick a random student, rebuilt in React for smoother animation.',
 
     'notFound.heading': 'This page does not exist',
     'notFound.text':
@@ -74,7 +77,7 @@ export const translations = {
 
     'games.heading': 'Mini Games',
     'games.intro':
-      "Tic-Tac-Toe and the stopwatch are rebuilt in React. Everything else here is the original vanilla JS, unchanged — no reason to rewrite something that already works.",
+      'Tic-Tac-Toe, the stopwatch and the student picker are rebuilt in React. Everything else here is the original vanilla JS, unchanged — no reason to rewrite something that already works.',
     'games.back': '← Back to mini games',
 
     'ticTacToe.heading': 'Tic-Tac-Toe',
@@ -83,6 +86,10 @@ export const translations = {
     'stopwatch.heading': 'Stopwatch',
     'stopwatch.intro':
       'A stopwatch with lap history, and a countdown timer with presets — switch between them above.',
+
+    'wheel.heading': 'Student Picker',
+    'wheel.intro':
+      "Six modes for picking a random student, all built around the same class rosters. Edit names, pick a mode, hit go.",
 
     'footer.site': 'Site',
     'footer.elsewhere': 'Elsewhere',
@@ -137,6 +144,9 @@ export const translations = {
     'meta.ticTacToe.desc': 'Крестики и нолики с определением победы и ничьей, на React.',
     'meta.stopwatch.title': 'Секундомер — Aleksei Lopatin',
     'meta.stopwatch.desc': 'Секундомер с историей кругов и таймер обратного отсчёта, на React.',
+    'meta.wheel.title': 'Выбор ученика — Aleksei Lopatin',
+    'meta.wheel.desc':
+      'Шесть способов выбрать случайного ученика, переписано на React ради плавной анимации.',
 
     'notFound.heading': 'Такой страницы нет',
     'notFound.text':
@@ -172,7 +182,7 @@ export const translations = {
 
     'games.heading': 'Мини-игры',
     'games.intro':
-      'Крестики-нолики и секундомер переписаны на React. Всё остальное здесь — оригинальный ванильный JS без изменений: незачем переписывать то, что и так работает.',
+      'Крестики-нолики, секундомер и выбор ученика переписаны на React. Всё остальное здесь — оригинальный ванильный JS без изменений: незачем переписывать то, что и так работает.',
     'games.back': '← Назад к мини-играм',
 
     'ticTacToe.heading': 'Крестики-нолики',
@@ -181,6 +191,10 @@ export const translations = {
     'stopwatch.heading': 'Секундомер',
     'stopwatch.intro':
       'Секундомер с историей кругов и таймер обратного отсчёта с готовыми интервалами — переключение вкладками выше.',
+
+    'wheel.heading': 'Выбор ученика',
+    'wheel.intro':
+      'Шесть режимов случайного выбора ученика, все работают с одними и теми же составами классов. Отредактируй имена, выбери режим, жми кнопку.',
 
     'footer.site': 'Сайт',
     'footer.elsewhere': 'Где ещё',

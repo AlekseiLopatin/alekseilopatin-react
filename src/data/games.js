@@ -28,6 +28,28 @@ export const games = [
     tags: ['React', 'Timers'],
   },
   {
+    id: 'student-picker',
+    title: 'Student Picker',
+    kind: 'react',
+    href: '/games/wheel',
+    description: {
+      en: 'Six ways to pick a random student — wheel, slots, plinko, race, gacha, balloons. Rebuilt in React from a slow single-file version for smoother animation.',
+      ru: 'Шесть способов выбрать случайного ученика: колесо, слоты, плинко, гонка, гача, шарики. Переписан на React из медленной однофайловой версии — анимация стала плавнее.',
+    },
+    tags: ['React', 'Canvas'],
+  },
+  {
+    id: 'fraction-quiz',
+    title: 'Fraction Practice',
+    kind: 'static',
+    href: '/games/fraction-quiz/',
+    description: {
+      en: 'Quiz for simplifying fractions, built for my own classroom.',
+      ru: 'Тренажёр на сокращение дробей, сделан для моего собственного класса.',
+    },
+    tags: ['JavaScript', 'Math'],
+  },
+  {
     id: 'protect-your-friend',
     title: 'Protect Your Friend',
     kind: 'external',
@@ -81,16 +103,5 @@ export const games = [
       ru: 'Покер на кубиках с подсчётом комбинаций.',
     },
     tags: ['JavaScript'],
-  },
-  {
-    id: 'fraction-quiz',
-    title: 'Fraction Practice',
-    kind: 'static',
-    href: '/games/fraction-quiz/',
-    description: {
-      en: 'Quiz for simplifying fractions, built for my own classroom.',
-      ru: 'Тренажёр на сокращение дробей, сделан для моего собственного класса.',
-    },
-    tags: ['JavaScript', 'Math'],
   },
 ];

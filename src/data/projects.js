@@ -125,11 +125,12 @@ export const projects = [
     id: 'student-picker',
     title: 'Student Picker',
     description: {
-      en: 'Single-file random student picker with six animated styles.',
-      ru: 'Случайный выбор ученика в одном файле, шесть анимированных режимов.',
+      en: 'Random student picker with six animated styles — wheel, slots, plinko, race, gacha, balloons. Rebuilt in React for smoother animation.',
+      ru: 'Случайный выбор ученика с шестью анимированными режимами: колесо, слоты, плинко, гонка, гача, шарики. Переписан на React ради плавной анимации.',
     },
-    href: 'https://legacy.alekseilopatin.com/wheel/',
-    tags: ['JavaScript', 'Tool', 'UI'],
+    href: '/games/wheel',
+    internal: true,
+    tags: ['React', 'Canvas', 'Tool'],
   },
   {
     id: 'protect-your-friend',

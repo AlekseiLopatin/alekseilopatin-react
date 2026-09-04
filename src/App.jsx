@@ -8,6 +8,7 @@ import { CurrencyPage } from './pages/CurrencyPage';
 import { GamesPage } from './pages/GamesPage';
 import { TicTacToePage } from './pages/TicTacToePage';
 import { StopwatchPage } from './pages/StopwatchPage';
+import { WheelPage } from './pages/WheelPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import './App.css';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/games" element={<GamesPage />} />
           <Route path="/games/tic-tac-toe" element={<TicTacToePage />} />
           <Route path="/stopwatch" element={<StopwatchPage />} />
+          <Route path="/games/wheel" element={<WheelPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
