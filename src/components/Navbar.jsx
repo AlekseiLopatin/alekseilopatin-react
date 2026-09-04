@@ -8,7 +8,6 @@ import './Navbar.css';
    to — маршрут роутера, hash — якорь внутри главной. */
 export const navLinks = [
   { id: 'projects', labelKey: 'nav.projects', to: '/' },
-  { id: 'practice', labelKey: 'nav.practice', to: '/practice' },
   { id: 'about', labelKey: 'nav.about', to: '/#about' },
   { id: 'contact', labelKey: 'nav.contact', to: '/#contact' },
 ];
