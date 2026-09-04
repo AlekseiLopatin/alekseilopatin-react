@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraction Practice — alekseilopatin.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,300&family=Raleway:wght@700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<style>
+  /* ============================================================
+     REFINED EMBER — brand tokens (from alekseilopatin.github.io/brand.css)
+     ============================================================ */
+  :root{
+    --color-base:          #141210;
+    --color-surface:       #201c18;
+    --color-elevated:      #2c2620;
+    --color-accent:        #d4a44b;
+    --color-accent-hover:  #e8b85c;
+    --color-accent-muted:  rgba(212, 164, 75, 0.15);
+    --color-on-accent:     #141210;
+    --color-text:          #e8dcc8;
+    --color-text-muted:    #a09080;
+    --color-text-faint:    #5a4e42;
+    --color-border:        #3a3020;
+    --color-border-accent: rgba(212, 164, 75, 0.25);
+    --color-border-strong: #5a4e42;
+    --color-success:       #7c9a52;
+    --color-error:         #d4614f;
+    --font-heading:        'Raleway', sans-serif;
+    --font-body:           'Poppins', sans-serif;
+    --font-mono:           'Courier New', Courier, monospace;
+    --transition:          200ms ease;
+    --shadow-sm:           0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md:           0 4px 12px rgba(0, 0, 0, 0.5);
+    --radius-sm:           3px;
+    --radius-md:           6px;
+    --radius-lg:           10px;
+    /* app-only additions, kept consistent with the palette above */
+    --color-warning:       #d4a44b;
+    --color-neutral:       #4a3f34;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    margin:0; font-family:var(--font-body); font-weight:400; background:var(--color-base); color:var(--color-text);
+    min-height:100%;
+    background-image:radial-gradient(circle at 20% 0%, rgba(212,164,75,0.07) 0%, transparent 50%),
+                     radial-gradient(circle at 80% 100%, rgba(212,164,75,0.05) 0%, transparent 50%);
+  }
+  button{font-family:inherit; cursor:pointer; border:none;}
+
+  header{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:12px 18px; background:var(--color-surface); border-bottom:1px solid var(--color-border); position:sticky; top:0; z-index:10;
+  }
+  header h1{font-family:var(--font-heading); font-weight:700; font-size:19px; margin:0; white-space:nowrap; color:var(--color-text);}
+  header h1 span{color:var(--color-accent);}
+  .tabs{display:flex; gap:6px; flex-wrap:wrap;}
+  .spacer{flex:1;}
+  .connStatus{font-size:12px; font-weight:400; padding:5px 12px; border-radius:999px; background:var(--color-elevated); color:var(--color-text-muted); white-space:nowrap;}
+  .connStatus.synced{background:rgba(124,154,82,0.15); color:var(--color-success);}
+  .connStatus.offline{background:rgba(212,97,79,0.15); color:var(--color-error);}
+  .setupBanner{
+    background:var(--color-elevated); border-left:3px solid var(--color-warning); color:var(--color-text-muted);
+    font-size:13px; font-weight:300; padding:12px 18px; text-align:center;
+  }
+
+  /* shared pill-tab look for grade / topic / difficulty rows */
+  .pillTab{
+    display:flex; align-items:center; gap:7px; padding:8px 16px; border-radius:var(--radius-md);
+    background:var(--color-elevated); color:var(--color-text-muted); font-weight:400; font-size:13px;
+    border:1px solid transparent; transition:all var(--transition);
+  }
+  .pillTab.active{background:var(--color-accent); color:var(--color-on-accent); border-color:var(--color-accent-hover);}
+  .pillTab:hover:not(.active){background:var(--color-border-strong); color:var(--color-text);}
+
+  .topic-row, .difficulty-row{
+    display:flex; gap:8px; flex-wrap:wrap; padding:10px 18px; background:var(--color-surface);
+    border-bottom:1px solid var(--color-border);
+  }
+
+  .layout{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:16px; padding:18px; max-width:1180px; margin:0 auto;
+  }
+  @media (max-width:900px){ .layout{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--color-surface); border-radius:var(--radius-lg); padding:18px; box-shadow:var(--shadow-md);
+    border:1px solid var(--color-border);
+  }
+  .card h2{
+    margin:0 0 12px; font-family:var(--font-body); font-weight:400; font-size:12px; color:var(--color-accent);
+    text-transform:uppercase; letter-spacing:.12em;
+  }
+
+  /* solver picker */
+  .solver{display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;}
+  .solverName{
+    font-family:var(--font-heading); font-size:clamp(24px,5vw,34px); font-weight:700; min-height:1.3em; color:var(--color-accent);
+  }
+  .solverName.empty{color:var(--color-text-muted); font-size:16px; font-weight:400; font-family:var(--font-body);}
+  .pickbtn{
+    padding:12px 30px; font-size:15px; font-weight:400; border-radius:var(--radius-md);
+    background:var(--color-accent); color:var(--color-on-accent);
+    box-shadow:var(--shadow-sm); transition:all var(--transition);
+  }
+  .pickbtn:hover:not(:disabled){background:var(--color-accent-hover); transform:translateY(-1px); box-shadow:var(--shadow-md);}
+  .pickbtn:active:not(:disabled){transform:translateY(0);}
+  .pickbtn:disabled{filter:grayscale(.5) brightness(.7); cursor:default;}
+  .pickCaption{font-size:11px; font-weight:300; color:var(--color-text-muted);}
+
+  /* exercise */
+  .fracRow{display:flex; align-items:center; justify-content:center; gap:18px; padding:18px 0 10px; flex-wrap:wrap;}
+  .prompt{font-size:15px; font-weight:300; font-style:italic; color:var(--color-accent);}
+  .frac{
+    display:inline-flex; flex-direction:column; align-items:center; font-family:var(--font-heading);
+    font-weight:700; font-size:clamp(30px,5.5vw,46px); line-height:1.15; color:var(--color-text);
+  }
+  .frac.placeholder{color:var(--color-text-faint);}
+  .frac.whole{padding:0 6px;}
+  .frac .n, .frac .d{padding:0 10px;}
+  .frac .bar{width:100%; height:4px; background:currentColor; border-radius:2px; margin:2px 0;}
+  .eq, .opSymbol{font-family:var(--font-heading); font-size:clamp(24px,4.5vw,36px); font-weight:700; color:var(--color-text-muted);}
+  .reveal{
+    text-align:center; min-height:24px; font-size:14px; font-weight:400; color:var(--color-success);
+  }
+  .padWrap{margin-top:8px;}
+  .padHint{font-size:12px; font-weight:300; color:var(--color-text-muted); text-align:center; margin-bottom:6px;}
+  canvas.pad{
+    width:100%; height:200px; display:block; border-radius:var(--radius-md); background:#f2e8d6;
+    box-shadow:inset 0 0 0 2px var(--color-border-accent), var(--shadow-sm); touch-action:none; cursor:crosshair;
+  }
+  .padBtns{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .pbtn{
+    padding:9px 16px; border-radius:var(--radius-sm); font-weight:400; font-size:13px;
+    background:var(--color-elevated); color:var(--color-text); border:1px solid var(--color-border);
+    transition:all var(--transition);
+  }
+  .pbtn:hover{border-color:var(--color-border-strong); background:var(--color-base);}
+
+  .scoreBtns{display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;}
+  .sbtn{
+    flex:1; min-width:130px; padding:14px 10px; border-radius:var(--radius-md); font-weight:400; font-size:14px;
+    opacity:1; transition:transform .08s, filter .15s;
+  }
+  .sbtn small{display:block; font-weight:300; font-size:11px; opacity:.85; margin-top:2px;}
+  .sbtn.correct{background:var(--color-success); color:#0e1a08;}
+  .sbtn.mistake{background:var(--color-warning); color:var(--color-on-accent);}
+  .sbtn.tried{background:var(--color-neutral); color:var(--color-text);}
+  .sbtn:disabled{filter:grayscale(.6) brightness(.75); cursor:default;}
+  .sbtn:not(:disabled):active{transform:scale(.97);}
+
+  /* scoreboard */
+  .board{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;}
+  .row{
+    display:flex; align-items:center; gap:10px; padding:9px 12px; border-radius:var(--radius-md); background:var(--color-elevated);
+    transition:background .3s;
+  }
+  .row.flash{background:var(--color-accent-muted);}
+  .rank{width:22px; text-align:center; font-weight:700; color:var(--color-text-muted); font-size:13px;}
+  .rname{flex:1; font-weight:400; font-size:14px; color:var(--color-text);}
+  .rpts{font-weight:700; color:var(--color-accent); font-size:14px;}
+  .resetRow{display:flex; justify-content:flex-end; margin-top:10px;}
+
+  #fx{position:fixed; inset:0; z-index:55; pointer-events:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧮 Fraction <span>Practice</span></h1>
+  <div class="tabs" id="gradeTabs"></div>
+  <div class="spacer"></div>
+  <span class="connStatus" id="connStatus">⏳ Connecting…</span>
+</header>
+
+<div class="setupBanner" id="setupBanner" style="display:none;">
+  ⚠️ Not connected to the shared database yet — scores are only saved on this device/browser.
+  Paste your Firebase config into the FIREBASE_CONFIG block in this file to sync scores everywhere.
+</div>
+
+<div class="topic-row" id="topicTabs"></div>
+<div class="difficulty-row" id="diffTabs"></div>
+
+<div class="layout">
+  <div style="display:flex; flex-direction:column; gap:16px;">
+
+    <div class="card">
+      <h2>Who's solving?</h2>
+      <div class="solver">
+        <div class="solverName empty" id="solverName">Tap to pick a student</div>
+        <button class="pickbtn" id="pickBtn">🎲 Pick Random Student</button>
+        <div class="pickCaption">🎯 Students lower on the scoreboard get picked more often</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 id="exerciseTitle">Simplify this fraction</h2>
+      <div class="fracRow" id="fracRow"></div>
+      <div class="reveal" id="revealText"></div>
+      <div class="padWrap">
+        <div class="padHint">✍️ Handwrite the answer here</div>
+        <canvas class="pad" id="pad"></canvas>
+        <div class="padBtns">
+          <button class="pbtn" id="clearBtn">🧽 Clear pad</button>
+          <button class="pbtn" id="revealBtn">👁 Reveal answer</button>
+          <button class="pbtn" id="skipBtn">🔄 New exercise (no score)</button>
+        </div>
+      </div>
+      <div class="scoreBtns">
+        <button class="sbtn correct" id="scoreCorrect">✅ Correct<small>+10 pts</small></button>
+        <button class="sbtn mistake" id="scoreMistake">🟡 Small mistake<small>+5 pts</small></button>
+        <button class="sbtn tried" id="scoreTried">🙁 Tried, no luck<small>+2 pts</small></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <h2>Scoreboard</h2>
+    <ul class="board" id="board"></ul>
+    <div class="resetRow"><button class="pbtn" id="resetScoresBtn">♻️ Reset scores</button></div>
+  </div>
+</div>
+
+<canvas id="fx"></canvas>
+
+<script>
+'use strict';
+/* =================== rosters (same classes as the student picker) =================== */
+const DEFAULTS = [
+  {label:'5A', names:['Paopao','Major','Shop','Win','Photo','Phu','Pete','Pun','Popun','Geo','Lego','Copter','Dhruva','Khun','Arty','Nampunch','Oengoey','Taew','Aunda','Gail','Napran','Milin','Kongkwan','Bright','Nicha','Fasai','Nava','Khaopon','Paint','Focus']},
+  {label:'5B', names:['Khun','Buakaw','Ikkui','Petar','Pakorn','Techo','Perth','Spock','Prin','Krahm','Chamin','Prem','Chin','Pao','Irine','Fia','Benz','Nada (18)','Nabtang','Tonhom','Pround','Cream','Nada (23)','Jaoei','Kanom','Pun','Kaem','Pat','Stang','Aris']},
+  {label:'5C', names:['Andew','Beam','Nuea','Kaowpun','Leo','Panther','Rio','Cheetah','Phupat','Tankhun','Pprize','Tawan','Dmax','Imaim','Jean','Data','Drive','Yam','Nicha','Namtan','Eiw','Meya','Baifern','Loma','I-oun','Pungping','Anya','Ongfong']},
+];
+const LS_KEY = 'fraction-quiz-v1';
+let S;
+try { S = JSON.parse(localStorage.getItem(LS_KEY)); } catch(e){}
+if (!S || !Array.isArray(S.grades) || S.grades.length !== 3) {
+  S = { grades: DEFAULTS.map(g => ({label:g.label, names:[...g.names], scores:{}})), current:0, topic:'simplify', difficulty:'easy', currentStudent:null, exercise:null, revealed:false };
+}
+if (!S.topic) S.topic = 'simplify'; // upgrade older saved state that predates topics
+const save = () => localStorage.setItem(LS_KEY, JSON.stringify(S));
+const G = () => S.grades[S.current];
+
+/* =================== shared database (Firebase Firestore) =================== */
+// Only SCORES are synced across devices — difficulty, current grade tab, current
+// exercise, and current solver stay local to each browser (localStorage as before).
+//
+// ONE-TIME SETUP (~5 min): create a free project at https://console.firebase.google.com/
+// -> Build -> Firestore Database -> Create database -> in the Rules tab allow
+// read/write on the gradeScores collection -> register a Web app ("</>") and paste
+// the firebaseConfig object it gives you into FIREBASE_CONFIG below.
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCLBlsR_HR2RsFamgN8sex2ViH_FJc8lKM",
+  authDomain: "classroom-scores-c5b28.firebaseapp.com",
+  projectId: "classroom-scores-c5b28",
+  storageBucket: "classroom-scores-c5b28.firebasestorage.app",
+  messagingSenderId: "659883471740",
+  appId: "1:659883471740:web:19e0b84e985acdb6862af9",
+};
+const FIREBASE_READY = !!(FIREBASE_CONFIG.apiKey && !FIREBASE_CONFIG.apiKey.startsWith('PASTE_'));
+let db = null;
+function setConnStatus(kind, label){
+  const el = document.getElementById('connStatus');
+  el.className = 'connStatus ' + kind;
+  el.textContent = label;
+}
+if (FIREBASE_READY){
+  firebase.initializeApp(FIREBASE_CONFIG);
+  db = firebase.firestore();
+  S.grades.forEach(g => {
+    db.collection('gradeScores').doc(g.label).onSnapshot(snap => {
+      const data = snap.data();
+      g.scores = (data && data.scores) || {};
+      setConnStatus('synced', '☁️ Synced');
+      renderBoard();
+    }, err => {
+      console.error('Firestore sync error', err);
+      setConnStatus('offline', '⚠️ Sync error');
+    });
+  });
+} else {
+  document.getElementById('setupBanner').style.display = 'block';
+  setConnStatus('offline', '📴 Local only');
+}
+function remoteBumpScore(gradeLabel, name, delta){
+  if (!db) return;
+  db.collection('gradeScores').doc(gradeLabel).set(
+    { scores: { [name]: firebase.firestore.FieldValue.increment(delta) } },
+    { merge: true }
+  ).catch(err => console.error('score sync failed', err));
+}
+function remoteResetScores(gradeLabel){
+  if (!db) return;
+  db.collection('gradeScores').doc(gradeLabel).set({ scores: {} }).catch(err => console.error('reset sync failed', err));
+}
+
+/* =================== utils =================== */
+const irand = n => Math.floor(Math.random()*n);
+const clamp = (x,a,b) => Math.max(a, Math.min(b,x));
+const easeOutCubic = t => 1 - Math.pow(1-t, 3);
+function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b, a%b]; } return a; }
+function pickWeighted(items){
+  const total = items.reduce((s,it)=>s+it[1],0);
+  let r = Math.random()*total;
+  for (const [v,w] of items){ r -= w; if (r <= 0) return v; }
+  return items[items.length-1][0];
+}
+// biases toward `min` when skew > 1 — used so each tier still favors its simpler end
+function biasedInt(min, max, skew){
+  const t = Math.pow(Math.random(), skew);
+  return Math.round(min + t*(max-min));
+}
+function formatFrac(n, d){ return d === 1 ? `${n}` : `${n}/${d}`; }
+const PALETTE = ['#d4a44b','#e8b85c','#7c9a52','#e8dcc8','#a09080'];
+
+/* =================== weighted student randomizer =================== */
+// Catch-up mechanic: ranked by current score, the bottom 10 get picked most often,
+// the middle 10 less often, and the top 10 least often — keeps a few strong
+// scorers from hogging every turn while still leaving them a (smaller) chance.
+const PICK_TIER_WEIGHT = {top:1, middle:2, bottom:3};
+function rankedTiers(){
+  const g = G();
+  const ranked = g.names.map(name => ({name, pts: g.scores[name] || 0}))
+    .sort((a,b) => b.pts - a.pts); // highest score first
+  return {top: ranked.slice(0,10), middle: ranked.slice(10,20), bottom: ranked.slice(20)};
+}
+function weightedPickStudent(){
+  const {top, middle, bottom} = rankedTiers();
+  const items = [];
+  top.forEach(s => items.push([s.name, PICK_TIER_WEIGHT.top]));
+  middle.forEach(s => items.push([s.name, PICK_TIER_WEIGHT.middle]));
+  bottom.forEach(s => items.push([s.name, PICK_TIER_WEIGHT.bottom]));
+  return pickWeighted(items);
+}
+
+/* =================== exercise generation =================== */
+function coprimeBase(aMax, bMax, skew){
+  for (let tries=0; tries<40; tries++){
+    const a = biasedInt(1, aMax, skew);
+    const b = biasedInt(a+1, bMax, skew);
+    if (gcd(a,b) === 1) return [a,b];
+  }
+  return [1,2];
+}
+
+// --- Topic: Simplify --------------------------------------------------------
+// every exercise = (a*k)/(b*k) with gcd(a,b)=1 and k>1, so it is ALWAYS reducible —
+// never a dead-end coprime fraction like 17/999
+const SIMPLIFY_TIERS = {
+  easy:       {aMax:4,  bMax:6,  skew:1.3, kPool:[[2,55],[3,30],[4,15]]},
+  medium:     {aMax:9,  bMax:14, skew:1.4, kPool:[[2,28],[3,26],[4,16],[5,12],[6,18]]},
+  hard:       {aMax:15, bMax:20, skew:1.5, kPool:[[3,14],[4,10],[6,16],[7,20],[8,10],[9,10],[11,10],[13,10]]},
+  impossible: {aMax:24, bMax:36, skew:1.6, kPool:[[7,10],[9,10],[11,12],[12,14],[13,10],[14,12],[15,10],[16,8],[18,10],[21,8],[24,6]]},
+};
+function genSimplifyExercise(tierKey){
+  const cfg = SIMPLIFY_TIERS[tierKey];
+  const [a,b] = coprimeBase(cfg.aMax, cfg.bMax, cfg.skew);
+  const k = pickWeighted(cfg.kPool);
+  return {n:a*k, d:b*k, simN:a, simD:b, k};
+}
+
+// --- Topics: Add / Subtract / Multiply / Divide -----------------------------
+// Two proper fractions in lowest terms, with a slight chance the second one is
+// forced to share the first one's denominator (the "easy" case where you can
+// skip finding a common denominator).
+const OP_TIERS = {
+  easy:       {aMax:4,  bMax:6,  skew:1.3, sameDenomChance:0.55},
+  medium:     {aMax:7,  bMax:10, skew:1.4, sameDenomChance:0.45},
+  hard:       {aMax:10, bMax:15, skew:1.5, sameDenomChance:0.30},
+  impossible: {aMax:14, bMax:20, skew:1.6, sameDenomChance:0.20},
+};
+function genOperationExercise(topic, tierKey){
+  const cfg = OP_TIERS[tierKey];
+  let [a1,b1] = coprimeBase(cfg.aMax, cfg.bMax, cfg.skew);
+  let a2, b2;
+  if (Math.random() < cfg.sameDenomChance){
+    b2 = b1;
+    a2 = biasedInt(1, b1-1, cfg.skew);
+  } else {
+    [a2,b2] = coprimeBase(cfg.aMax, cfg.bMax, cfg.skew);
+  }
+
+  if (topic === 'sub' && a1*b2 < a2*b1){ [a1,b1,a2,b2] = [a2,b2,a1,b1]; } // never show a negative result
+
+  let numResult, denResult;
+  if (topic === 'add')      { numResult = a1*b2 + a2*b1; denResult = b1*b2; }
+  else if (topic === 'sub') { numResult = a1*b2 - a2*b1; denResult = b1*b2; }
+  else if (topic === 'mul') { numResult = a1*a2;          denResult = b1*b2; }
+  else /* div */            { numResult = a1*b2;          denResult = b1*a2; }
+
+  if (numResult === 0) return {a1,b1,a2,b2, simN:0, simD:1};
+  const g = gcd(numResult, denResult);
+  return {a1,b1,a2,b2, simN:numResult/g, simD:denResult/g};
+}
+
+function genExercise(topic, tierKey){
+  return topic === 'simplify' ? genSimplifyExercise(tierKey) : genOperationExercise(topic, tierKey);
+}
+
+/* =================== confetti =================== */
+const fx = document.getElementById('fx');
+const fctx = fx.getContext('2d');
+let parts = [], fxRunning = false;
+function sizeFx(){ fx.width = innerWidth*devicePixelRatio; fx.height = innerHeight*devicePixelRatio; fctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+sizeFx(); addEventListener('resize', sizeFx);
+function burst(x,y,n=36){
+  for (let i=0;i<n;i++){
+    parts.push({x,y, vx:(Math.random()*2-1)*7, vy:-Math.random()*7-1, w:Math.random()*6+4, h:Math.random()*4+3,
+      rot:Math.random()*Math.PI*2, vr:(Math.random()*2-1)*.25, c:PALETTE[irand(PALETTE.length)], life:Math.random()*40+70});
+  }
+  if (!fxRunning){ fxRunning = true; requestAnimationFrame(fxLoop); }
+}
+function fxLoop(){
+  fctx.clearRect(0,0,innerWidth,innerHeight);
+  parts = parts.filter(p => p.life>0 && p.y<innerHeight+30);
+  for (const p of parts){
+    p.x+=p.vx; p.y+=p.vy; p.vy+=0.22; p.vx*=0.99; p.rot+=p.vr; p.life--;
+    fctx.save(); fctx.translate(p.x,p.y); fctx.rotate(p.rot);
+    fctx.fillStyle=p.c; fctx.globalAlpha=clamp(p.life/30,0,1); fctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); fctx.restore();
+  }
+  if (parts.length) requestAnimationFrame(fxLoop); else { fxRunning=false; fctx.clearRect(0,0,innerWidth,innerHeight); }
+}
+
+/* =================== handwriting pad =================== */
+const pad = document.getElementById('pad');
+const pctx = pad.getContext('2d');
+let drawing = false, lastX=0, lastY=0;
+function sizePad(){
+  const w = pad.clientWidth, h = pad.clientHeight;
+  pad.width = w*devicePixelRatio; pad.height = h*devicePixelRatio;
+  pctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  drawGuide();
+}
+function drawGuide(){
+  const w = pad.clientWidth, h = pad.clientHeight;
+  pctx.clearRect(0,0,w,h);
+  pctx.strokeStyle = 'rgba(90,78,66,0.4)'; pctx.lineWidth = 2;
+  pctx.beginPath(); pctx.moveTo(w*0.35, h/2); pctx.lineTo(w*0.65, h/2); pctx.stroke();
+}
+function clearPad(){ drawGuide(); }
+function posFromEvent(e){
+  const r = pad.getBoundingClientRect();
+  return [e.clientX - r.left, e.clientY - r.top];
+}
+pad.addEventListener('pointerdown', e => {
+  drawing = true; pad.setPointerCapture(e.pointerId);
+  [lastX, lastY] = posFromEvent(e);
+});
+pad.addEventListener('pointermove', e => {
+  if (!drawing) return;
+  const [x,y] = posFromEvent(e);
+  pctx.strokeStyle = '#2c2013'; pctx.lineWidth = 4; pctx.lineCap = 'round'; pctx.lineJoin = 'round';
+  pctx.beginPath(); pctx.moveTo(lastX,lastY); pctx.lineTo(x,y); pctx.stroke();
+  lastX = x; lastY = y;
+});
+addEventListener('pointerup', () => { drawing = false; });
+sizePad();
+addEventListener('resize', () => sizePad());
+
+/* =================== rendering =================== */
+function renderGradeTabs(){
+  const el = document.getElementById('gradeTabs');
+  el.innerHTML = '';
+  S.grades.forEach((g,i) => {
+    const b = document.createElement('button');
+    b.className = 'pillTab' + (i===S.current ? ' active':'');
+    b.textContent = g.label;
+    b.onclick = () => {
+      S.current = i; S.currentStudent = null;
+      S.exercise = genExercise(S.topic, S.difficulty); S.revealed = false;
+      save(); renderAll(); clearPad();
+    };
+    el.appendChild(b);
+  });
+}
+const TOPIC_META = {
+  simplify: {ic:'📝', label:'Simplify',  prompt:'Simplify:', cardTitle:'Simplify this fraction'},
+  add:      {ic:'➕', label:'Add',       prompt:'Solve:', opSymbol:'+', cardTitle:'Add these fractions'},
+  sub:      {ic:'➖', label:'Subtract',  prompt:'Solve:', opSymbol:'−', cardTitle:'Subtract these fractions'},
+  mul:      {ic:'✖️', label:'Multiply',  prompt:'Solve:', opSymbol:'×', cardTitle:'Multiply these fractions'},
+  div:      {ic:'➗', label:'Divide',    prompt:'Solve:', opSymbol:'÷', cardTitle:'Divide these fractions'},
+};
+function renderTopicTabs(){
+  const el = document.getElementById('topicTabs');
+  el.innerHTML = '';
+  for (const [key,m] of Object.entries(TOPIC_META)){
+    const b = document.createElement('button');
+    b.className = 'pillTab' + (key===S.topic ? ' active':'');
+    b.innerHTML = `${m.ic} ${m.label}`;
+    b.onclick = () => {
+      S.topic = key; S.exercise = genExercise(key, S.difficulty); S.revealed = false;
+      save(); renderAll(); clearPad();
+    };
+    el.appendChild(b);
+  }
+}
+const DIFF_META = {
+  easy:{ic:'🌱',label:'Easy'}, medium:{ic:'🌿',label:'Medium'}, hard:{ic:'🌳',label:'Hard'}, impossible:{ic:'💀',label:'Impossible'},
+};
+function renderDiffTabs(){
+  const el = document.getElementById('diffTabs');
+  el.innerHTML = '';
+  for (const [key,m] of Object.entries(DIFF_META)){
+    const b = document.createElement('button');
+    b.className = 'pillTab' + (key===S.difficulty ? ' active':'');
+    b.innerHTML = `${m.ic} ${m.label}`;
+    b.onclick = () => {
+      S.difficulty = key; S.exercise = genExercise(S.topic, key); S.revealed = false;
+      save(); renderAll(); clearPad();
+    };
+    el.appendChild(b);
+  }
+}
+function renderSolver(){
+  const el = document.getElementById('solverName');
+  if (S.currentStudent){ el.textContent = S.currentStudent; el.classList.remove('empty'); }
+  else { el.textContent = 'Tap to pick a student'; el.classList.add('empty'); }
+  const scoreDisabled = !S.currentStudent;
+  document.getElementById('scoreCorrect').disabled = scoreDisabled;
+  document.getElementById('scoreMistake').disabled = scoreDisabled;
+  document.getElementById('scoreTried').disabled = scoreDisabled;
+}
+function fracHTML(n, d, extraClass){
+  const cls = 'frac' + (extraClass ? ' ' + extraClass : '');
+  if (d === 1) return `<div class="${cls} whole"><span class="n">${n}</span></div>`;
+  return `<div class="${cls}"><span class="n">${n}</span><span class="bar"></span><span class="d">${d}</span></div>`;
+}
+function renderExercise(){
+  if (!S.exercise) S.exercise = genExercise(S.topic, S.difficulty);
+  const ex = S.exercise;
+  const meta = TOPIC_META[S.topic];
+  document.getElementById('exerciseTitle').textContent = meta.cardTitle;
+  const row = document.getElementById('fracRow');
+  if (S.topic === 'simplify'){
+    row.innerHTML = `
+      <span class="prompt">${meta.prompt}</span>
+      ${fracHTML(ex.n, ex.d)}
+      <span class="eq">=</span>
+      ${fracHTML('?','?','placeholder')}
+    `;
+  } else {
+    row.innerHTML = `
+      <span class="prompt">${meta.prompt}</span>
+      ${fracHTML(ex.a1, ex.b1)}
+      <span class="opSymbol">${meta.opSymbol}</span>
+      ${fracHTML(ex.a2, ex.b2)}
+      <span class="eq">=</span>
+      ${fracHTML('?','?','placeholder')}
+    `;
+  }
+  const rt = document.getElementById('revealText');
+  if (!S.revealed) rt.textContent = '';
+  else if (S.topic === 'simplify') rt.textContent = `Simplified: ${formatFrac(ex.simN, ex.simD)}  (divide both by ${ex.k})`;
+  else rt.textContent = `Answer: ${formatFrac(ex.simN, ex.simD)}`;
+}
+function renderBoard(){
+  const el = document.getElementById('board');
+  el.innerHTML = '';
+  const rows = G().names.map(name => ({name, pts: G().scores[name] || 0}))
+    .sort((a,b) => b.pts - a.pts);
+  const medals = ['🥇','🥈','🥉'];
+  rows.forEach((r,i) => {
+    const li = document.createElement('li');
+    li.className = 'row';
+    if (r.name === lastScored) { li.classList.add('flash'); }
+    li.innerHTML = `<span class="rank">${medals[i] || (i+1)}</span><span class="rname">${r.name}</span><span class="rpts">${r.pts}</span>`;
+    el.appendChild(li);
+  });
+}
+function renderAll(){ renderGradeTabs(); renderTopicTabs(); renderDiffTabs(); renderSolver(); renderExercise(); renderBoard(); }
+
+/* =================== student randomizer =================== */
+let spinning = false;
+document.getElementById('pickBtn').onclick = () => {
+  if (spinning) return;
+  const names = G().names;
+  if (!names.length) return;
+  spinning = true;
+  document.getElementById('pickBtn').disabled = true;
+  const winner = weightedPickStudent();
+  const display = document.getElementById('solverName');
+  display.classList.remove('empty');
+  const dur = 2200, t0 = performance.now();
+  function tick(){
+    const t = clamp((performance.now() - t0)/dur, 0, 1);
+    if (t < 1){
+      display.textContent = names[irand(names.length)];
+      const delay = 35 + 240*easeOutCubic(t)*easeOutCubic(t);
+      setTimeout(() => requestAnimationFrame(tick), delay);
+    } else {
+      display.textContent = winner;
+      S.currentStudent = winner;
+      save();
+      spinning = false;
+      document.getElementById('pickBtn').disabled = false;
+      renderSolver();
+      const r = display.getBoundingClientRect();
+      burst(r.left + r.width/2, r.top + r.height/2, 30);
+    }
+  }
+  tick();
+};
+
+/* =================== exercise controls =================== */
+document.getElementById('clearBtn').onclick = clearPad;
+document.getElementById('revealBtn').onclick = () => { S.revealed = true; save(); renderExercise(); };
+document.getElementById('skipBtn').onclick = () => {
+  S.exercise = genExercise(S.topic, S.difficulty); S.revealed = false; save(); renderExercise(); clearPad();
+};
+
+/* =================== scoring =================== */
+let lastScored = null, flashTimer = null;
+function score(points){
+  if (!S.currentStudent) return;
+  const g = G();
+  g.scores[S.currentStudent] = (g.scores[S.currentStudent] || 0) + points;
+  lastScored = S.currentStudent;
+  save();
+  renderBoard();
+  remoteBumpScore(g.label, S.currentStudent, points);
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => { lastScored = null; renderBoard(); }, 1200);
+  if (points === 10){
+    const r = pad.getBoundingClientRect();
+    burst(r.left + r.width/2, r.top + r.height/2, 26);
+  }
+  S.currentStudent = null;
+  S.exercise = genExercise(S.topic, S.difficulty);
+  S.revealed = false;
+  save();
+  renderSolver(); renderExercise(); clearPad();
+}
+document.getElementById('scoreCorrect').onclick = () => score(10);
+document.getElementById('scoreMistake').onclick = () => score(5);
+document.getElementById('scoreTried').onclick = () => score(2);
+
+/* =================== reset scores =================== */
+document.getElementById('resetScoresBtn').onclick = () => {
+  if (!confirm(`Reset all scores for ${G().label}?`)) return;
+  const g = G();
+  g.scores = {}; save(); renderBoard();
+  remoteResetScores(g.label);
+};
+
+/* =================== init =================== */
+if (!S.exercise) S.exercise = genExercise(S.topic, S.difficulty);
+save();
+renderAll();
+</script>
+</body>
+</html>

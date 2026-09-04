@@ -1,0 +1,157 @@
+/* Refined Ember · Aleksei Lopatin brand system v1.0
+   Variables injected via ../../brand.css */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --main-bg-color: var(--color-base);
+  --section-bg-color: var(--color-surface);
+  --golden-yellow: var(--color-accent);
+  --platform-color: var(--color-border-strong);
+  --player-color: var(--color-error);
+  --checkpoint-color: var(--color-accent);
+}
+
+/* Theme 1: Warm Desert */
+.theme-desert {
+  --main-bg-color: #e5d5b2;
+  --section-bg-color: #ffffff;
+  --golden-yellow: #feac32;
+  --platform-color: #8b4513;
+  --player-color: #ff6b6b;
+  --checkpoint-color: #f1be32;
+}
+
+/* Theme 2: Ocean Blue */
+.theme-ocean {
+  --main-bg-color: #4a90e2;
+  --section-bg-color: #e8f4fd;
+  --golden-yellow: #00bcd4;
+  --platform-color: #1565c0;
+  --player-color: #ff5722;
+  --checkpoint-color: #00bcd4;
+}
+
+/* Theme 3: Forest Green */
+.theme-forest {
+  --main-bg-color: #2e7d32;
+  --section-bg-color: #e8f5e8;
+  --golden-yellow: #4caf50;
+  --platform-color: #1b5e20;
+  --player-color: #ff9800;
+  --checkpoint-color: #4caf50;
+}
+
+/* Theme 4: Sunset Purple */
+.theme-sunset {
+  --main-bg-color: #673ab7;
+  --section-bg-color: #f3e5f5;
+  --golden-yellow: #e91e63;
+  --platform-color: #4a148c;
+  --player-color: #ff5722;
+  --checkpoint-color: #e91e63;
+}
+
+/* Theme 5: Midnight Dark */
+.theme-midnight {
+  --main-bg-color: #263238;
+  --section-bg-color: #37474f;
+  --golden-yellow: #ffc107;
+  --platform-color: #102027;
+  --player-color: #e91e63;
+  --checkpoint-color: #ffc107;
+}
+
+/* Theme 6: Final Victory (Rainbow) */
+.theme-victory {
+  --main-bg-color: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+  --section-bg-color: #ffffff;
+  --golden-yellow: #ffd700;
+  --platform-color: #2c3e50;
+  --player-color: #e74c3c;
+  --checkpoint-color: #ffd700;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--main-bg-color);
+  transition: background 0.8s ease-in-out;
+  color: var(--color-text);
+}
+
+body.theme-victory {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3);
+  background-size: 400% 400%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.start-screen {
+  background-color: var(--section-bg-color);
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  padding: 20px;
+  padding-bottom: 5px;
+  border: 1px solid rgba(0,0,0,0.15);
+}
+
+.main-title { text-align: center; color: var(--color-on-accent); }
+
+.instructions {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 1rem;
+  line-height: 2rem;
+}
+
+.btn {
+  cursor: pointer;
+  width: 100px;
+  margin: 0.6rem;
+  color: var(--color-on-accent);
+  font-size: 1.1rem;
+  background-color: var(--golden-yellow);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
+  transition: background-color var(--transition);
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkpoint-screen {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  background-color: var(--section-bg-color);
+  border-radius: 20px;
+  padding: 10px;
+  display: none;
+}
+
+#canvas { display: none; }
+
+@media (min-width: 768px) {
+  .start-screen { width: 60%; max-width: 700px; }
+  .checkpoint-screen { max-width: 300px; }
+}

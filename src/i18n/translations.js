@@ -32,6 +32,13 @@ export const translations = {
       'Converts 44 currencies on live rates, with search, flags and an offline fallback.',
     'meta.notFound.title': 'Page not found — Aleksei Lopatin',
     'meta.notFound.desc': 'This address does not exist on the site.',
+    'meta.games.title': 'Mini Games — Aleksei Lopatin',
+    'meta.games.desc':
+      'Tic-Tac-Toe and a stopwatch rebuilt in React, plus the original vanilla-JS mini games.',
+    'meta.ticTacToe.title': 'Tic-Tac-Toe — Aleksei Lopatin',
+    'meta.ticTacToe.desc': 'X and O with win and draw detection, built in React.',
+    'meta.stopwatch.title': 'Stopwatch — Aleksei Lopatin',
+    'meta.stopwatch.desc': 'A stopwatch with lap history and a countdown timer, built in React.',
 
     'notFound.heading': 'This page does not exist',
     'notFound.text':
@@ -65,12 +72,25 @@ export const translations = {
     'currency.intro':
       'Live rates for 44 currencies, with a stored table as a fallback when the network is unavailable.',
 
+    'games.heading': 'Mini Games',
+    'games.intro':
+      "Tic-Tac-Toe and the stopwatch are rebuilt in React. Everything else here is the original vanilla JS, unchanged — no reason to rewrite something that already works.",
+    'games.back': '← Back to mini games',
+
+    'ticTacToe.heading': 'Tic-Tac-Toe',
+    'ticTacToe.intro': 'X and O, win detection, a draw message, and a reset button.',
+
+    'stopwatch.heading': 'Stopwatch',
+    'stopwatch.intro':
+      'A stopwatch with lap history, and a countdown timer with presets — switch between them above.',
+
     'footer.site': 'Site',
     'footer.elsewhere': 'Elsewhere',
     'footer.archive': 'Archive',
     'footer.projects': 'Projects',
     'footer.practice': 'Practice',
     'footer.currency': 'Currency converter',
+    'footer.games': 'Mini games',
     'footer.github': 'GitHub',
     'footer.linkedin': 'LinkedIn',
     'footer.email': 'Email',
@@ -110,6 +130,13 @@ export const translations = {
       'Конвертирует 44 валюты по живым курсам: поиск, флаги и работа без сети.',
     'meta.notFound.title': 'Страница не найдена — Aleksei Lopatin',
     'meta.notFound.desc': 'Такого адреса на сайте нет.',
+    'meta.games.title': 'Мини-игры — Aleksei Lopatin',
+    'meta.games.desc':
+      'Крестики-нолики и секундомер переписаны на React, остальные мини-игры — оригинальный ванильный JS.',
+    'meta.ticTacToe.title': 'Крестики-нолики — Aleksei Lopatin',
+    'meta.ticTacToe.desc': 'Крестики и нолики с определением победы и ничьей, на React.',
+    'meta.stopwatch.title': 'Секундомер — Aleksei Lopatin',
+    'meta.stopwatch.desc': 'Секундомер с историей кругов и таймер обратного отсчёта, на React.',
 
     'notFound.heading': 'Такой страницы нет',
     'notFound.text':
@@ -143,12 +170,25 @@ export const translations = {
     'currency.intro':
       'Живые курсы 44 валют, с запасной таблицей на случай, когда сети нет.',
 
+    'games.heading': 'Мини-игры',
+    'games.intro':
+      'Крестики-нолики и секундомер переписаны на React. Всё остальное здесь — оригинальный ванильный JS без изменений: незачем переписывать то, что и так работает.',
+    'games.back': '← Назад к мини-играм',
+
+    'ticTacToe.heading': 'Крестики-нолики',
+    'ticTacToe.intro': 'Крестики и нолики, определение победы, ничья и кнопка сброса.',
+
+    'stopwatch.heading': 'Секундомер',
+    'stopwatch.intro':
+      'Секундомер с историей кругов и таймер обратного отсчёта с готовыми интервалами — переключение вкладками выше.',
+
     'footer.site': 'Сайт',
     'footer.elsewhere': 'Где ещё',
     'footer.archive': 'Архив',
     'footer.projects': 'Проекты',
     'footer.practice': 'Практика',
     'footer.currency': 'Конвертер валют',
+    'footer.games': 'Мини-игры',
     'footer.github': 'GitHub',
     'footer.linkedin': 'LinkedIn',
     'footer.email': 'Почта',

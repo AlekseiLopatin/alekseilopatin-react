@@ -60,7 +60,6 @@ describe('routing', () => {
     expect(screen.getByText(/pick a colour/i)).toBeInTheDocument();
     expect(screen.getAllByText(/otp generator/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/event rsvp/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/tic-tac-toe/i).length).toBeGreaterThan(0);
   });
 
   it('renders the currency page', () => {
@@ -69,6 +68,58 @@ describe('routing', () => {
     expect(
       screen.getByRole('heading', { name: /currency converter/i, level: 1 }),
     ).toBeInTheDocument();
+  });
+
+  it('renders the games hub with links to every game', () => {
+    renderAt('/games');
+
+    expect(
+      screen.getByRole('heading', { name: /mini games/i, level: 1 }),
+    ).toBeInTheDocument();
+    /* Внутренние — <Link>: Tic-Tac-Toe и Stopwatch. */
+    expect(screen.getByRole('link', { name: /tic-tac-toe/i })).toHaveAttribute(
+      'href',
+      '/games/tic-tac-toe',
+    );
+    expect(screen.getByRole('link', { name: /stopwatch/i })).toHaveAttribute(
+      'href',
+      '/stopwatch',
+    );
+    /* Внешняя — новая вкладка, ведёт на архивный сайт. */
+    const godotGame = screen.getByRole('link', {
+      name: /protect your friend/i,
+    });
+    expect(godotGame).toHaveAttribute('target', '_blank');
+    expect(godotGame.getAttribute('href')).toContain('legacy.alekseilopatin.com');
+    /* Статичные ванильные игры — обычная ссылка, без target,
+       полная перезагрузка на статику из public/games. */
+    const dragonGame = screen.getByRole('link', {
+      name: /dragon repeller/i,
+    });
+    expect(dragonGame).toHaveAttribute('href', '/games/dragon-repeller/');
+    expect(dragonGame).not.toHaveAttribute('target');
+  });
+
+  it('renders Tic-Tac-Toe on its own page, reachable from the games hub', async () => {
+    const user = userEvent.setup();
+    renderAt('/games');
+
+    await user.click(screen.getByRole('link', { name: /tic-tac-toe/i }));
+
+    expect(
+      screen.getByRole('heading', { name: /tic-tac-toe/i, level: 1 }),
+    ).toBeInTheDocument();
+    expect(document.querySelectorAll('button.square')).toHaveLength(9);
+  });
+
+  it('serves the React stopwatch at the legacy /stopwatch URL', () => {
+    renderAt('/stopwatch');
+
+    expect(
+      screen.getByRole('heading', { name: /stopwatch/i, level: 1 }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /^stopwatch$/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /^timer$/i })).toBeInTheDocument();
   });
 
   it('answers an unknown address with the 404 page, not a blank screen', () => {

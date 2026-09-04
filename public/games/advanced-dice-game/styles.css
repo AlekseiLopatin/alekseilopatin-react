@@ -1,0 +1,117 @@
+/* Refined Ember · Aleksei Lopatin brand system v1.0
+   Variables injected via ../../brand.css */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-base);
+  color: var(--color-text);
+}
+
+header {
+  color: var(--color-text);
+  text-align: center;
+  padding: 1rem;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  margin: 1.4rem 0;
+  color: var(--color-text);
+}
+
+.rules-container {
+  display: none;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  width: 50%;
+  margin: 1.2rem auto;
+  max-height: 300px;
+  border-radius: var(--radius-md);
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
+.rules-container ul { list-style-type: none; }
+
+.points { margin-top: 1rem; }
+
+main {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  padding: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1rem;
+  margin: 1rem auto;
+  justify-items: center;
+  width: 50%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+#dice {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.die {
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 1rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rounds-text {
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+input[type="radio"]:disabled + label { color: var(--color-text-faint); }
+
+#score-history {
+  margin-top: 1rem;
+  text-align: center;
+  list-style-position: inside;
+  color: var(--color-text-muted);
+}
+
+.btn {
+  cursor: pointer;
+  width: 200px;
+  height: 44px;
+  margin: 0.6rem 0 0.6rem 0.5rem;
+  color: var(--color-on-accent);
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  transition: background-color var(--transition);
+}
+
+.btn:hover:enabled { background-color: var(--color-accent-hover); }
+
+form > .btn {
+  display: block;
+  margin: 0.6rem auto;
+}
+
+@media (max-width: 992px) { main { width: 100%; } }
+@media (max-width: 500px) { .btn { width: 120px; } }

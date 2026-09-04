@@ -1,0 +1,82 @@
+/* Refined Ember · Aleksei Lopatin brand system v1.0
+   Variables injected via ../../brand.css */
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 75em) { html { font-size: 60%; } }
+@media (max-width: 61.25em) { html { font-size: 58%; } }
+@media (max-width: 28.75em) { html { font-size: 55%; } }
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-accent);
+  background: var(--color-base);
+  padding: 1rem;
+}
+
+#text {
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+#game {
+  max-width: 50rem;
+  background: var(--color-elevated);
+  border: 1px solid var(--color-border);
+  margin: 2rem auto 0 auto;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+#controls, #stats {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.6rem;
+}
+
+#monsterStats {
+  display: none;
+  border: 1px solid var(--color-error);
+  padding: 0.5rem;
+  color: var(--color-text);
+  background: rgba(184, 80, 66, 0.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.6rem;
+}
+
+.stat { padding-right: 1rem; }
+
+button {
+  cursor: pointer;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 400;
+  transition: background-color var(--transition);
+}
+
+button:hover { background-color: var(--color-accent-hover); }

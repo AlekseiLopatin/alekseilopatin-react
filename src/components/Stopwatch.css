@@ -1,0 +1,202 @@
+.stopwatch {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.stopwatch-tabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.stopwatch-tab {
+  flex: 1;
+  font: inherit;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-muted);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    color var(--transition),
+    border-color var(--transition);
+}
+
+.stopwatch-tab.is-active {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.stopwatch-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* .stopwatch-panel { display: flex } — авторское правило,
+   оно перебивает браузерное [hidden]{display:none}, поэтому
+   пишем его явно, иначе скрытая вкладка осталась бы видимой. */
+.stopwatch-panel[hidden] {
+  display: none;
+}
+
+.stopwatch-display {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.timer-status {
+  min-height: 1.4em;
+  margin-top: calc(var(--space-4) * -1);
+  font-size: var(--text-sm);
+  color: var(--color-error);
+}
+
+.stopwatch-controls {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.stopwatch-primary,
+.stopwatch-secondary {
+  font: inherit;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.stopwatch-primary {
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+}
+
+.stopwatch-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.stopwatch-secondary {
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.stopwatch-secondary:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.stopwatch-primary:disabled,
+.stopwatch-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* --- История секундомера --- */
+.stopwatch-history {
+  width: 100%;
+}
+
+.stopwatch-history h3 {
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-2);
+}
+
+.stopwatch-history ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  max-height: 160px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.stopwatch-history li {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: var(--space-2);
+  color: var(--color-text-muted);
+  background: var(--color-base);
+  border-radius: var(--radius-sm);
+}
+
+/* --- Пресеты таймера --- */
+.timer-presets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.timer-preset {
+  font: inherit;
+  font-size: var(--text-xs);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-muted);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.timer-preset:hover {
+  border-color: var(--color-accent);
+}
+
+.timer-custom {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.timer-custom input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text);
+  background: var(--color-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.timer-custom input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.timer-custom button {
+  font: inherit;
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.timer-custom button:hover {
+  background: var(--color-accent-hover);
+}

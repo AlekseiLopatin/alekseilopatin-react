@@ -13,6 +13,7 @@ const columns = [
       { key: 'footer.projects', to: '/' },
       { key: 'footer.practice', to: '/practice' },
       { key: 'footer.currency', to: '/currency' },
+      { key: 'footer.games', to: '/games' },
     ],
   },
   {

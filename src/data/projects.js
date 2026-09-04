@@ -16,6 +16,18 @@ export const projects = [
     image: '/media/currency.svg',
     tags: ['React', 'API', 'Tool'],
   },
+  {
+    id: 'mini-games',
+    title: 'Mini Games',
+    description: {
+      en: 'A shelf of small games: two rebuilt in React, the rest kept as the original vanilla JS.',
+      ru: 'Полка маленьких игр: две переписаны на React, остальные — как есть, на ванильном JS.',
+    },
+    href: '/games',
+    internal: true,
+    image: '/media/mini-games.svg',
+    tags: ['React', 'Game', 'JavaScript'],
+  },
 
   /* ---------- Новые проекты ---------- */
   {
@@ -94,17 +106,6 @@ export const projects = [
     href: 'https://github.com/AlekseiLopatin/dnd-critical-hit-bot',
     image: '/media/dnd-bot.png',
     tags: ['Python', 'Discord', 'TTRPG'],
-  },
-  {
-    id: 'location-generators',
-    title: 'Location Generators',
-    description: {
-      en: 'Procedurally generates fantasy trading posts with 20+ interlocking traits.',
-      ru: 'Процедурная генерация фэнтезийных торговых постов: 20+ взаимосвязанных признаков.',
-    },
-    href: 'https://github.com/AlekseiLopatin/location-generators',
-    image: '/media/location-generators.png',
-    tags: ['Python', 'Tool', 'TTRPG'],
   },
   /* 10-я по счёту: попадает во "Show more", а не на первый экран —
      это лаборатория упражнений, не отдельный проект. */
