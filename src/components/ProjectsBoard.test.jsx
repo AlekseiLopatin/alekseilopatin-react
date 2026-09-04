@@ -57,9 +57,11 @@ describe('ProjectsBoard', () => {
     const user = userEvent.setup();
     renderWithProviders(<ProjectsBoard />);
 
-    const practice = screen.getByRole('link', { name: /Practice Lab/ });
-    expect(practice).toHaveAttribute('href', '/practice');
-    expect(practice).not.toHaveAttribute('target');
+    /* Currency Converter — внутренняя ссылка на первой странице;
+       Practice Lab теперь 10-й и открывается только через "show more". */
+    const internal = screen.getByRole('link', { name: /Currency Converter/ });
+    expect(internal).toHaveAttribute('href', '/currency');
+    expect(internal).not.toHaveAttribute('target');
 
     await user.click(screen.getByRole('button', { name: 'Godot' }));
     const external = cards()[0];

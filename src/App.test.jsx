@@ -80,9 +80,11 @@ describe('routing', () => {
   });
 
   it('navigates from the projects page to the practice page', async () => {
+    /* Practice Lab — 10-й проект, значит скрыт за "show more". */
     const user = userEvent.setup();
     renderAt('/');
 
+    await user.click(screen.getByRole('button', { name: /show \d+ more/i }));
     await user.click(screen.getByRole('link', { name: /Practice Lab/ }));
 
     expect(

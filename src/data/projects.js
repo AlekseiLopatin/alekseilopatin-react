@@ -5,18 +5,6 @@
 export const projects = [
   /* ---------- Внутренние страницы сайта ---------- */
   {
-    id: 'practice',
-    title: 'Practice Lab',
-    description: {
-      en: 'A shelf of small React exercises: colour picker, OTP generator, RSVP form and whatever comes next.',
-      ru: 'Полка с маленькими упражнениями на React: выбор цвета, генератор OTP, форма RSVP и всё, что появится дальше.',
-    },
-    href: '/practice',
-    internal: true,
-    image: '/media/practice.svg',
-    tags: ['React', 'Lab'],
-  },
-  {
     id: 'currency-converter',
     title: 'Currency Converter',
     description: {
@@ -117,6 +105,20 @@ export const projects = [
     href: 'https://github.com/AlekseiLopatin/location-generators',
     image: '/media/location-generators.png',
     tags: ['Python', 'Tool', 'TTRPG'],
+  },
+  /* 10-я по счёту: попадает во "Show more", а не на первый экран —
+     это лаборатория упражнений, не отдельный проект. */
+  {
+    id: 'practice',
+    title: 'Practice Lab',
+    description: {
+      en: 'A shelf of small React exercises: colour picker, OTP generator, RSVP form and whatever comes next.',
+      ru: 'Полка с маленькими упражнениями на React: выбор цвета, генератор OTP, форма RSVP и всё, что появится дальше.',
+    },
+    href: '/practice',
+    internal: true,
+    image: '/media/practice.svg',
+    tags: ['React', 'Lab'],
   },
   {
     id: 'student-picker',

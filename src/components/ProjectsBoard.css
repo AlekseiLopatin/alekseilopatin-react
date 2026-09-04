@@ -1,6 +1,9 @@
 .projects-board {
   max-width: var(--content-width);
   margin: 0 auto;
+  /* Без этого последний элемент (кнопка или сетка) упирается прямо
+     в border-top секции About — зазора между ними нет вообще. */
+  padding-bottom: var(--space-16);
 }
 
 .projects-heading {
