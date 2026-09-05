@@ -17,6 +17,41 @@ const renderAt = (route) =>
     </MemoryRouter>,
   );
 
+/* jsdom не рисует 2D-канвас и не знает Web Audio — колесо (режим
+   Wheel по умолчанию) монтирует канвас сразу, а любой спин играет
+   звук. Те же заглушки, что и в WheelOfNames.test.jsx. */
+const stubCtx = {
+  clearRect() {}, beginPath() {}, moveTo() {}, lineTo() {}, arc() {},
+  closePath() {}, fill() {}, stroke() {}, save() {}, restore() {},
+  translate() {}, rotate() {}, fillRect() {}, strokeRect() {},
+  fillText() {}, setTransform() {},
+  measureText: () => ({ width: 40 }),
+  createRadialGradient: () => ({ addColorStop() {} }),
+};
+
+class StubAudioContext {
+  currentTime = 0;
+  sampleRate = 44100;
+  state = 'running';
+  destination = {};
+  resume() {}
+  createOscillator() {
+    return { connect: () => ({ connect() {} }), start() {}, stop() {}, frequency: { value: 0 } };
+  }
+  createGain() {
+    return {
+      connect: () => ({ connect() {} }),
+      gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} },
+    };
+  }
+  createBuffer(channels, length) {
+    return { getChannelData: () => new Float32Array(length) };
+  }
+  createBufferSource() {
+    return { connect: () => ({ connect() {} }), start() {}, buffer: null };
+  }
+}
+
 beforeEach(() => {
   /* Конвертер на своей странице ходит в сеть — подменяем,
      чтобы тест роутинга не зависел от интернета. */
@@ -32,28 +67,31 @@ beforeEach(() => {
     })),
   );
   window.scrollTo = vi.fn();
+  vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(stubCtx);
+  vi.stubGlobal('AudioContext', StubAudioContext);
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
 
 describe('routing', () => {
-  it('shows projects, about and contact on the home page', () => {
+  it('shows projects, about and contact on the home page', async () => {
     renderAt('/');
 
     expect(
-      screen.getByRole('heading', { name: 'Projects', level: 2 }),
+      await screen.findByRole('heading', { name: 'Projects', level: 2 }),
     ).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'About' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Contact' })).toBeInTheDocument();
   });
 
-  it('renders the practice page with every lab on it', () => {
+  it('renders the practice page with every lab on it', async () => {
     renderAt('/practice');
 
     expect(
-      screen.getByRole('heading', { name: /practice lab/i, level: 1 }),
+      await screen.findByRole('heading', { name: /practice lab/i, level: 1 }),
     ).toBeInTheDocument();
     /* getAllByText, а не getByText: у каждой лабы есть и заголовок
        карточки на странице, и собственный заголовок внутри. */
@@ -62,19 +100,19 @@ describe('routing', () => {
     expect(screen.getAllByText(/event rsvp/i).length).toBeGreaterThan(0);
   });
 
-  it('renders the currency page', () => {
+  it('renders the currency page', async () => {
     renderAt('/currency');
 
     expect(
-      screen.getByRole('heading', { name: /currency converter/i, level: 1 }),
+      await screen.findByRole('heading', { name: /currency converter/i, level: 1 }),
     ).toBeInTheDocument();
   });
 
-  it('renders the games hub with links to every game', () => {
+  it('renders the games hub with links to every game', async () => {
     renderAt('/games');
 
     expect(
-      screen.getByRole('heading', { name: /mini games/i, level: 1 }),
+      await screen.findByRole('heading', { name: /mini games/i, level: 1 }),
     ).toBeInTheDocument();
     /* Внутренние — <Link>: Tic-Tac-Toe и Stopwatch. */
     expect(screen.getByRole('link', { name: /tic-tac-toe/i })).toHaveAttribute(
@@ -104,28 +142,40 @@ describe('routing', () => {
     const user = userEvent.setup();
     renderAt('/games');
 
-    await user.click(screen.getByRole('link', { name: /tic-tac-toe/i }));
+    await user.click(await screen.findByRole('link', { name: /tic-tac-toe/i }));
 
     expect(
-      screen.getByRole('heading', { name: /tic-tac-toe/i, level: 1 }),
+      await screen.findByRole('heading', { name: /tic-tac-toe/i, level: 1 }),
     ).toBeInTheDocument();
     expect(document.querySelectorAll('button.square')).toHaveLength(9);
   });
 
-  it('serves the React stopwatch at the legacy /stopwatch URL', () => {
+  it('serves the React stopwatch at the legacy /stopwatch URL', async () => {
     renderAt('/stopwatch');
 
     expect(
-      screen.getByRole('heading', { name: /stopwatch/i, level: 1 }),
+      await screen.findByRole('heading', { name: /stopwatch/i, level: 1 }),
     ).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /^stopwatch$/i })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /^timer$/i })).toBeInTheDocument();
+    /* Без навбара/футера, только кнопка "назад". */
+    expect(screen.queryByRole('navigation', { name: /main/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to mini games/i })).toBeInTheDocument();
   });
 
-  it('answers an unknown address with the 404 page, not a blank screen', () => {
+  it('serves the student picker wheel without the site navbar or footer', async () => {
+    renderAt('/games/wheel');
+
+    expect(await screen.findByText(/picker/i)).toBeInTheDocument();
+    expect(screen.queryByRole('navigation', { name: /main/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('contentinfo')).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /back to mini games/i })).toBeInTheDocument();
+  });
+
+  it('answers an unknown address with the 404 page, not a blank screen', async () => {
     renderAt('/does-not-exist');
 
-    expect(screen.getByText('404')).toBeInTheDocument();
+    expect(await screen.findByText('404')).toBeInTheDocument();
     expect(screen.getByText('/does-not-exist')).toBeInTheDocument();
     /* Навигация должна остаться: с 404 нужно иметь возможность уйти. */
     expect(screen.getByRole('navigation', { name: /main/i })).toBeInTheDocument();
@@ -136,26 +186,27 @@ describe('routing', () => {
     const user = userEvent.setup();
     renderAt('/');
 
-    await user.click(screen.getByRole('button', { name: /show \d+ more/i }));
+    await user.click(await screen.findByRole('button', { name: /show \d+ more/i }));
     await user.click(screen.getByRole('link', { name: /Practice Lab/ }));
 
     expect(
-      screen.getByRole('heading', { name: /practice lab/i, level: 1 }),
+      await screen.findByRole('heading', { name: /practice lab/i, level: 1 }),
     ).toBeInTheDocument();
   });
 
-  it('has no dead links anywhere in the footer', () => {
+  it('has no dead links anywhere in the footer', async () => {
     renderAt('/');
 
-    const footer = screen.getByRole('contentinfo');
+    const footer = await screen.findByRole('contentinfo');
     for (const link of within(footer).getAllByRole('link')) {
       expect(link.getAttribute('href')).not.toBe('#');
       expect(link.getAttribute('href')).toBeTruthy();
     }
   });
 
-  it('sets a page-specific document title', () => {
+  it('sets a page-specific document title', async () => {
     renderAt('/currency');
+    await screen.findByRole('heading', { name: /currency converter/i, level: 1 });
     expect(document.title).toMatch(/currency converter/i);
   });
 });

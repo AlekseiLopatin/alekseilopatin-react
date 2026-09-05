@@ -8,6 +8,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: var(--content-width);
   height: 80vh;
   min-height: 560px;
   max-height: 820px;

@@ -20,7 +20,12 @@ export const WheelMode = forwardRef(function WheelMode({ pool, muted }, ref) {
     const arc = (Math.PI * 2) / n;
     const cx = W / 2;
     const cy = H / 2 + 6;
-    const R = Math.min(W, H) / 2 - 46;
+    /* На доли секунды между переустановкой эффекта и пересчётом layout
+       (двойной вызов эффектов в StrictMode) стенд может измериться
+       нулевым — без ограничения снизу отрицательный радиус уронил бы
+       canvas ("IndexSizeError"). Кадр с R=0 невидим и тут же сменится
+       следующей перерисовкой с настоящими размерами. */
+    const R = Math.max(0, Math.min(W, H) / 2 - 46);
     geomRef.current = { n, arc, cx, cy, R };
 
     const draw = (highlight = -1) => {

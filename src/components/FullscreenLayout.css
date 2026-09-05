@@ -1,0 +1,48 @@
+/* dvh, а не vh: на мобильных vh считается от высоты экрана без
+   учёта адресной строки, и страница "не помещается" ровно на ту
+   полоску, что браузер прячет при скролле. */
+.fullscreen-page {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-base);
+}
+
+.fullscreen-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+}
+
+.fullscreen-title {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.fullscreen-back {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.fullscreen-back:hover {
+  color: var(--color-accent);
+}
+
+.fullscreen-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-4) var(--space-4);
+  overflow: auto;
+}
+
+.fullscreen-content > * {
+  max-height: 100%;
+}
