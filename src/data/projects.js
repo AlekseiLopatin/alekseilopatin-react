@@ -38,7 +38,7 @@ export const projects = [
       ru: 'Геймифицированное приложение для изучения тайского: дерево навыков, интервальные повторения, тренажёр тонов.',
     },
     href: 'https://thai-buddy.vercel.app',
-    image: '/media/thai-buddy.png',
+    image: '/media/thai-buddy.webp',
     tags: ['Next.js', 'TypeScript', 'Supabase'],
   },
   {
@@ -49,7 +49,7 @@ export const projects = [
       ru: 'React + TypeScript клиент для школьного электронного журнала.',
     },
     href: 'https://gradebook.alekseilopatin.com',
-    image: '/media/gradebook-frontend.png',
+    image: '/media/gradebook-frontend.webp',
     tags: ['React', 'TypeScript', 'Full-stack'],
   },
   {
@@ -60,7 +60,7 @@ export const projects = [
       ru: 'Бэкенд на FastAPI + SQLAlchemy + PostgreSQL с ролевым доступом.',
     },
     href: 'https://github.com/AlekseiLopatin/school-portal-api',
-    image: '/media/gradebook-api.png',
+    image: '/media/gradebook-api.webp',
     tags: ['Python', 'FastAPI', 'PostgreSQL'],
   },
   {
@@ -82,7 +82,7 @@ export const projects = [
       ru: 'Портал управления школой: расписание, оценки, роли.',
     },
     href: 'https://school.alekseilopatin.com',
-    image: '/media/studyComputer.jpg',
+    image: '/media/studyComputer.webp',
     tags: ['React', 'API', 'Full-stack'],
   },
   {
@@ -93,7 +93,7 @@ export const projects = [
       ru: 'Django-приложение, превращающее Excel-таблицу в библиотеку с поиском.',
     },
     href: 'https://github.com/AlekseiLopatin/bookshelf',
-    image: '/media/bookshelf.png',
+    image: '/media/bookshelf.webp',
     tags: ['Python', 'Django'],
   },
   {
@@ -104,7 +104,7 @@ export const projects = [
       ru: 'Discord-бот, который разруливает расширенные правила критов прямо за столом.',
     },
     href: 'https://github.com/AlekseiLopatin/dnd-critical-hit-bot',
-    image: '/media/dnd-bot.png',
+    image: '/media/dnd-bot.webp',
     tags: ['Python', 'Discord', 'TTRPG'],
   },
   /* 10-я по счёту: попадает во "Show more", а не на первый экран —
@@ -152,7 +152,7 @@ export const projects = [
       ru: 'Браузерная игра на канвасе в фирменной тёмной палитре.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/emberHunter/ember-hunter.html',
-    image: '/media/ember.jpg',
+    image: '/media/ember.webp',
     tags: ['Canvas', 'Game'],
   },
   {
@@ -163,7 +163,7 @@ export const projects = [
       ru: 'Таблица с формулами и разбором выражений.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/spreadsheet/spreadsheet.html',
-    image: '/media/sheet.jpg',
+    image: '/media/sheet.webp',
     tags: ['JavaScript', 'Parser'],
   },
   {
@@ -174,7 +174,7 @@ export const projects = [
       ru: 'Среднее, медиана, мода, дисперсия и отклонение.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/statisticsCalculator/statisticsCalculator.html',
-    image: '/media/stats.png',
+    image: '/media/stats.webp',
     tags: ['JavaScript', 'Math'],
   },
   {
@@ -185,7 +185,7 @@ export const projects = [
       ru: 'Платформер с физикой прыжков и чекпоинтами.',
     },
     href: 'https://legacy.alekseilopatin.com/miniGames/platformer/platformer.html',
-    image: '/media/mario.jpg',
+    image: '/media/mario.webp',
     tags: ['Canvas', 'Game'],
   },
   {
@@ -207,7 +207,7 @@ export const projects = [
       ru: 'Покер на кубиках с подсчётом комбинаций.',
     },
     href: 'https://legacy.alekseilopatin.com/miniGames/advancedDiceGame/advancedDiceGame.html',
-    image: '/media/diceGame.jpg',
+    image: '/media/diceGame.webp',
     tags: ['JavaScript', 'Game'],
   },
   {
@@ -218,7 +218,7 @@ export const projects = [
       ru: 'Расширенная версия из «Теории большого взрыва».',
     },
     href: 'https://legacy.alekseilopatin.com/miniGames/rockScissorsPaper/rockScissorsPaperLizardSpock.html',
-    image: '/media/rockScissorsPaper.jpg',
+    image: '/media/rockScissorsPaper.webp',
     tags: ['JavaScript', 'Game'],
   },
   {
@@ -240,7 +240,7 @@ export const projects = [
       ru: 'Генератор операций для Band of Blades.',
     },
     href: 'https://legacy.alekseilopatin.com/rpgTools/operationGenerator/operationsGenerator.html',
-    image: '/media/bandOfBlades.jpg',
+    image: '/media/bandOfBlades.webp',
     tags: ['Tool', 'TTRPG'],
   },
   {
@@ -273,7 +273,7 @@ export const projects = [
       ru: 'Задачи с сохранением в localStorage.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/todoApp/todoApp.html',
-    image: '/media/todoApp.png',
+    image: '/media/todoApp.webp',
     tags: ['JavaScript', 'Storage'],
   },
   {
@@ -284,7 +284,7 @@ export const projects = [
       ru: 'Счётчик калорий с балансом за день.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/calorieCounter/calorieCounter.html',
-    image: '/media/calorie.jpg',
+    image: '/media/calorie.webp',
     tags: ['JavaScript', 'Forms'],
   },
   {
@@ -295,7 +295,7 @@ export const projects = [
       ru: 'Карточки учеников для школьного портала.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/studentCards/studentCards.html',
-    image: '/media/classroom.jpg',
+    image: '/media/classroom.webp',
     tags: ['JavaScript', 'UI'],
   },
   {
@@ -328,7 +328,7 @@ export const projects = [
       ru: 'Арабские числа в римские и обратно.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/romanToNumeral/romanToNumeral.html',
-    image: '/media/roman.png',
+    image: '/media/roman.webp',
     tags: ['JavaScript', 'Algorithms'],
   },
   {
@@ -350,7 +350,7 @@ export const projects = [
       ru: 'Проверка строки на палиндром.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/palindrome/palindrome.html',
-    image: '/media/level.jpg',
+    image: '/media/level.webp',
     tags: ['JavaScript', 'Algorithms'],
   },
   {
@@ -361,7 +361,7 @@ export const projects = [
       ru: 'Валидация телефонов регулярными выражениями.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/phoneValidator/phoneValidator.html',
-    image: '/media/phone.jpg',
+    image: '/media/phone.webp',
     tags: ['JavaScript', 'Regex'],
   },
   {
@@ -372,7 +372,7 @@ export const projects = [
       ru: 'Газетная вёрстка на колонках и гридах.',
     },
     href: 'https://legacy.alekseilopatin.com/projects/newspaperLayout/newspaperLayout.html',
-    image: '/media/classroomAnime.jpg',
+    image: '/media/classroomAnime.webp',
     tags: ['CSS', 'Layout'],
   },
 ];
