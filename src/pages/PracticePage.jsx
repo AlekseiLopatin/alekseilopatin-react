@@ -11,6 +11,24 @@ import './PracticePage.css';
    Порядок в массиве — порядок на странице. */
 const labs = [
   {
+    id: 'music-shopping-cart',
+    title: 'Music Shopping Cart',
+    note: {
+      en: 'A vinyl record cart with item removal and a running total.',
+      ru: 'Корзина виниловых пластинок с удалением товаров и пересчётом суммы.',
+    },
+    href: '/practice/music-shopping-cart.html',
+  },
+  {
+    id: 'photography-exhibit',
+    title: 'Photography Exhibit',
+    note: {
+      en: 'A responsive photography exhibit in the Refined Ember style.',
+      ru: 'Адаптивная фотовыставка в стиле Refined Ember.',
+    },
+    href: '/practice/photography-exhibit.html',
+  },
+  {
     id: 'color-picker',
     title: 'Color Picker',
     note: { en: 'useState, controlled input', ru: 'useState, контролируемый инпут' },
@@ -63,13 +81,24 @@ export const PracticePage = () => {
       </header>
 
       <div className="practice-grid">
-        {labs.map(({ id, title, note, Component }) => (
+        {labs.map(({ id, title, note, Component, href }) => (
           <article className="practice-item" key={id}>
             <header className="practice-item-header">
               <h2>{title}</h2>
               <p>{note[lang]}</p>
             </header>
-            <Component />
+            {href ? (
+              <a
+                className="practice-lab-link"
+                href={href}
+                aria-label={`${lang === 'ru' ? 'Открыть лабораторную' : 'Open lab'}: ${title}`}
+              >
+                {lang === 'ru' ? 'Открыть лабораторную' : 'Open lab'}
+                <span aria-hidden="true"> →</span>
+              </a>
+            ) : (
+              <Component />
+            )}
           </article>
         ))}
       </div>

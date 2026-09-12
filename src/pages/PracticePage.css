@@ -20,6 +20,22 @@
   color: var(--color-accent-hover);
 }
 
+.practice-lab-link {
+  display: block;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  text-align: center;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.practice-lab-link:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-hover);
+}
+
 .practice-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));

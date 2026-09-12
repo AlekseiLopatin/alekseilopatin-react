@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Still — a photography exhibit exploring the enduring beauty of stone, mountains, and sea." />
+    <title>Still — A Photography Exhibit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Raleway:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --color-base: #141210;
+        --color-surface: #201c18;
+        --color-accent: #d4a44b;
+        --color-text: #e8dcc8;
+        --color-text-muted: #b3a290;
+        --color-border: #3a3020;
+      }
+      body { font-family: 'Poppins', system-ui, sans-serif; }
+      h1, h2, .brand { font-family: 'Raleway', system-ui, sans-serif; }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[var(--color-base)] text-[var(--color-text)]">
+    <div class="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12">
+      <header class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--color-border)] pb-6">
+        <p class="brand text-xl font-bold tracking-widest">STILL<span class="text-[var(--color-accent)]">.</span></p>
+        <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">A photography exhibit / Vol. 01</p>
+      </header>
+
+      <main>
+        <a href="/practice" class="mt-6 inline-block text-sm text-[var(--color-accent)] underline underline-offset-4">← Back to Practice</a>
+        <section aria-labelledby="exhibit-title" class="pb-10 pt-12 sm:pb-12 sm:pt-16">
+          <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Stone. Altitude. Water.</p>
+          <h1 id="exhibit-title" class="max-w-3xl text-5xl font-bold leading-tight sm:text-7xl">The art of<br />standing <span class="text-[var(--color-accent)]">still.</span></h1>
+          <div class="mt-6 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            <p class="max-w-lg text-base leading-relaxed text-[var(--color-text-muted)]">Three places. Three different kinds of quiet. A small collection of photographs that invite you to slow down and look a little longer.</p>
+            <p class="shrink-0 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">Selected works <span class="ml-3 text-[var(--color-accent)]">01—03</span></p>
+          </div>
+        </section>
+
+        <section aria-label="Selected photographs" class="main-container grid grid-cols-1 gap-6 md:grid-cols-3">
+          <article class="card min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+            <img src="https://cdn.freecodecamp.org/curriculum/labs/colosseo.jpg" alt="The Colosseum in Rome, with its tiers of ancient stone arches." class="aspect-[4/5] w-full rounded-md object-cover" />
+            <div class="px-1 pb-3 pt-6">
+              <p class="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent)]">01 / Architecture</p>
+              <h2 class="subheading text-2xl font-bold">Echoes in Stone</h2>
+              <p class="description mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">Rome’s Colosseum holds centuries within its arches. Each weathered edge is a reminder that time can shape beauty as surely as any sculptor.</p>
+              <p class="mt-6 border-t border-[var(--color-border)] pt-4 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">Rome, Italy</p>
+            </div>
+          </article>
+
+          <article class="card min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+            <img src="https://cdn.freecodecamp.org/curriculum/labs/alps.jpg" alt="A view of mountain peaks in the Alps." class="aspect-[4/5] w-full rounded-md object-cover" />
+            <div class="px-1 pb-3 pt-6">
+              <p class="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent)]">02 / Landscape</p>
+              <h2 class="subheading text-2xl font-bold">Above the Noise</h2>
+              <p class="description mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">The Alps put everyday urgency into perspective. Along these ridgelines, the world feels larger, the air feels lighter, and there is room to breathe.</p>
+              <p class="mt-6 border-t border-[var(--color-border)] pt-4 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">The Alps, Europe</p>
+            </div>
+          </article>
+
+          <article class="card min-w-0 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
+            <img src="https://cdn.freecodecamp.org/curriculum/labs/sea.jpg" alt="A seascape showing the open water and coastline." class="aspect-[4/5] w-full rounded-md object-cover" />
+            <div class="px-1 pb-3 pt-6">
+              <p class="mb-3 text-xs font-medium uppercase tracking-widest text-[var(--color-accent)]">03 / Seascape</p>
+              <h2 class="subheading text-2xl font-bold">Where We Pause</h2>
+              <p class="description mt-3 text-sm leading-relaxed text-[var(--color-text-muted)]">The sea keeps its own rhythm. Water meets the shore, then slips away again — an ordinary movement that never quite repeats itself.</p>
+              <p class="mt-6 border-t border-[var(--color-border)] pt-4 text-xs uppercase tracking-widest text-[var(--color-text-muted)]">By the sea</p>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="mt-12 flex flex-col justify-between gap-3 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)] sm:flex-row">
+        <p>Aleksei Lopatin <span aria-hidden="true">/</span> Refined Ember</p>
+        <p>Photographs supplied by freeCodeCamp.</p>
+      </footer>
+    </div>
+  </body>
+</html>

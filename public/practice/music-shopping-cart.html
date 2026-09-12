@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ember Records — Your Cart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Raleway:wght@700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --color-base: #141210;
+        --color-surface: #201c18;
+        --color-elevated: #2c2620;
+        --color-accent: #d4a44b;
+        --color-text: #e8dcc8;
+        --color-text-muted: #b3a290;
+        --color-border: #3a3020;
+      }
+      body { font-family: 'Poppins', system-ui, sans-serif; }
+      h1, h2, .brand { font-family: 'Raleway', system-ui, sans-serif; }
+      :focus-visible { outline: 2px solid #e8b85c; outline-offset: 4px; }
+      .record {
+        background: repeating-radial-gradient(circle, #171411 0 3px, #30281e 4px, #171411 5px 7px);
+        border: 1px solid #5a4e42;
+        box-shadow: 0 8px 20px #0005;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition-duration: 0s !important; }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-[var(--color-base)] text-[var(--color-text)]">
+    <div class="mx-auto max-w-6xl px-5 py-8 sm:px-8 sm:py-12">
+      <header class="mb-12 flex items-center justify-between gap-4 border-b border-[var(--color-border)] pb-6">
+        <p class="brand text-lg font-bold tracking-wide">EMBER<span class="text-[var(--color-accent)]"> RECORDS</span></p>
+        <span class="text-xs uppercase tracking-widest text-[var(--color-text-muted)]">The listening room</span>
+      </header>
+
+      <main>
+        <a href="/practice" class="mb-6 inline-block text-sm text-[var(--color-accent)] underline underline-offset-4">← Back to Practice</a>
+        <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-accent)]">Selected for your shelves</p>
+        <h1 class="mb-3 text-4xl font-bold sm:text-5xl">Good music. On repeat.</h1>
+        <p class="mb-10 max-w-xl text-sm leading-relaxed text-[var(--color-text-muted)]">A little warmth for your record collection. Review your picks below.</p>
+
+        <div id="shopping-cart-container" class="flex flex-col gap-6 lg:flex-row lg:items-start">
+          <section id="products-container" aria-label="Records in your cart" class="flex min-w-0 flex-1 flex-col gap-4">
+            <article class="card flex flex-col gap-6 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:flex-row sm:items-center" data-unit-price="2800" data-quantity="1">
+              <div aria-hidden="true" class="flex h-28 w-28 shrink-0 items-center justify-center rounded-md bg-[var(--color-elevated)]">
+                <div class="record flex h-24 w-24 items-center justify-center rounded-full">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent)]"><span class="h-2 w-2 rounded-full bg-[var(--color-base)]"></span></div>
+                </div>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="mb-2 text-xs uppercase tracking-widest text-[var(--color-accent)]">01 / Jazz · Vinyl LP</p>
+                <h2 class="text-xl font-bold">After Hours</h2>
+                <p class="mt-1 text-sm text-[var(--color-text-muted)]">The Ember Quartet</p>
+                <p class="quantity mt-4 text-sm text-[var(--color-text-muted)]">Quantity: 1</p>
+              </div>
+              <div class="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
+                <p class="price text-xl font-semibold tabular-nums">$28.00</p>
+                <button type="button" class="remove-button min-h-11 cursor-pointer rounded-md bg-red-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-900" aria-label="Remove After Hours">Remove</button>
+              </div>
+            </article>
+
+            <article class="card flex flex-col gap-6 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:flex-row sm:items-center" data-unit-price="2400" data-quantity="2">
+              <div aria-hidden="true" class="flex h-28 w-28 shrink-0 items-center justify-center rounded-md bg-[var(--color-elevated)]">
+                <div class="record flex h-24 w-24 items-center justify-center rounded-full">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-full bg-[#b3a290]"><span class="h-2 w-2 rounded-full bg-[var(--color-base)]"></span></div>
+                </div>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="mb-2 text-xs uppercase tracking-widest text-[var(--color-accent)]">02 / Ambient · Vinyl LP</p>
+                <h2 class="text-xl font-bold">Slow Mornings</h2>
+                <p class="mt-1 text-sm text-[var(--color-text-muted)]">North Window</p>
+                <p class="quantity mt-4 text-sm text-[var(--color-text-muted)]">Quantity: 2</p>
+              </div>
+              <div class="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
+                <div class="text-right"><p class="price text-xl font-semibold tabular-nums">$48.00</p><p class="mt-1 text-xs text-[var(--color-text-muted)]">$24.00 each</p></div>
+                <button type="button" class="remove-button min-h-11 cursor-pointer rounded-md bg-red-800 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-900" aria-label="Remove Slow Mornings">Remove</button>
+              </div>
+            </article>
+          </section>
+
+          <aside id="order-summary-container" class="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-6 lg:w-80 lg:shrink-0">
+            <h2 class="text-2xl font-bold">Order Summary</h2>
+            <p id="item-count" class="mt-2 text-sm text-[var(--color-text-muted)]">3 records in your cart</p>
+            <div class="my-6 flex items-center justify-between gap-4 border-y border-[var(--color-border)] py-6" aria-live="polite" aria-atomic="true">
+              <p id="total" class="text-lg font-semibold">Total:</p>
+              <span id="total-amount" class="text-3xl font-bold tabular-nums text-[var(--color-accent)]">$76.00</span>
+            </div>
+            <a href="#" class="block rounded-md bg-blue-800 px-5 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-900">Checkout</a>
+            <p class="mt-4 text-xs leading-relaxed text-[var(--color-text-muted)]">Demo collection. No payment will be taken.</p>
+          </aside>
+        </div>
+        <p id="cart-status" role="status" class="mt-4 text-sm text-[var(--color-text-muted)]"></p>
+      </main>
+      <footer class="mt-12 border-t border-[var(--color-border)] pt-6 text-xs text-[var(--color-text-muted)]">Aleksei Lopatin <span aria-hidden="true">/</span> Refined Ember</footer>
+    </div>
+    <script>
+      const products = document.getElementById('products-container');
+      const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+      products.addEventListener('click', (event) => {
+        const button = event.target.closest('.remove-button');
+        if (!button) return;
+        const card = button.closest('.card');
+        const name = card.querySelector('h2').textContent;
+        card.remove();
+        const remaining = [...products.querySelectorAll('.card')];
+        const count = remaining.reduce((sum, item) => sum + Number(item.dataset.quantity), 0);
+        const cents = remaining.reduce((sum, item) => sum + Number(item.dataset.unitPrice) * Number(item.dataset.quantity), 0);
+        document.getElementById('total-amount').textContent = money.format(cents / 100);
+        document.getElementById('item-count').textContent = `${count} ${count === 1 ? 'record' : 'records'} in your cart`;
+        document.getElementById('cart-status').textContent = `${name} removed.${count === 0 ? ' Your cart is empty.' : ''}`;
+        const nextButton = products.querySelector('.remove-button');
+        if (nextButton) nextButton.focus();
+        else {
+          const status = document.getElementById('cart-status');
+          status.tabIndex = -1;
+          status.focus();
+        }
+      });
+    </script>
+  </body>
+</html>
