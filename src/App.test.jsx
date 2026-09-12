@@ -77,6 +77,24 @@ afterEach(() => {
 });
 
 describe('routing', () => {
+  it.each([
+    ['Color Picker', 'color-picker', '#color-input'],
+    ['OTP Generator', 'otp-generator', '#generate-otp-button'],
+    ['Event RSVP', 'event-rsvp', '#rsvp-name'],
+    ['Mood Board', 'mood-board', '.mood-board'],
+  ])('opens %s from the catalogue and returns to Practice', async (title, id, selector) => {
+    const user = userEvent.setup();
+    renderAt('/practice');
+    const link = await screen.findByRole('link', { name: `Open lab: ${title}` });
+    expect(link).toHaveAttribute('href', `/practice/${id}`);
+    expect(document.querySelector(selector)).not.toBeInTheDocument();
+    await user.click(link);
+    expect(await screen.findByRole('link', { name: '← Back to Practice' })).toBeInTheDocument();
+    expect(document.querySelector(selector)).toBeInTheDocument();
+    await user.click(screen.getByRole('link', { name: '← Back to Practice' }));
+    expect(await screen.findByRole('link', { name: `Open lab: ${title}` })).toBeInTheDocument();
+  });
+
   it('shows projects, about and contact on the home page', async () => {
     renderAt('/');
 
@@ -93,11 +111,10 @@ describe('routing', () => {
     expect(
       await screen.findByRole('heading', { name: /practice lab/i, level: 1 }),
     ).toBeInTheDocument();
-    /* getAllByText, а не getByText: у каждой лабы есть и заголовок
-       карточки на странице, и собственный заголовок внутри. */
-    expect(screen.getByText(/pick a colour/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/otp generator/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/event rsvp/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('link', { name: /^Open lab:/ })).toHaveLength(6);
+    expect(screen.getByRole('link', { name: 'Open lab: Music Shopping Cart' })).toHaveAttribute('href', '/practice/music-shopping-cart.html');
+    expect(screen.getByRole('link', { name: 'Open lab: Photography Exhibit' })).toHaveAttribute('href', '/practice/photography-exhibit.html');
+    expect(screen.queryByRole('button', { name: 'Generate OTP' })).not.toBeInTheDocument();
   });
 
   it('renders the currency page', async () => {

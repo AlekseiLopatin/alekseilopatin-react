@@ -11,6 +11,7 @@ import './App.css';
    подтягиваются по факту перехода на них). */
 const HomePage = lazy(() => import('./pages/HomePage'));
 const PracticePage = lazy(() => import('./pages/PracticePage'));
+const PracticeLabPage = lazy(() => import('./pages/PracticeLabPage'));
 const CurrencyPage = lazy(() => import('./pages/CurrencyPage'));
 const GamesPage = lazy(() => import('./pages/GamesPage'));
 const TicTacToePage = lazy(() => import('./pages/TicTacToePage'));
@@ -29,6 +30,7 @@ function App() {
           <Route element={<ChromeLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/practice" element={<PracticePage />} />
+            <Route path="/practice/:labId" element={<PracticeLabPage />} />
             <Route path="/currency" element={<CurrencyPage />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/games/tic-tac-toe" element={<TicTacToePage />} />
