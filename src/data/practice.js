@@ -3,6 +3,7 @@ export const practiceGroups = [
   { id: 'tailwind', title: { en: 'Tailwind: layouts', ru: 'Tailwind: вёрстка' } },
 ];
 export const practiceLabs = [
+  { id: 'area-calculator', group: 'react', title: 'Area Calculator', titleRu: 'Площадь фигур', technique: 'React · Math', description: { en: 'Calculate the area of seven shapes with diagrams and formulas.', ru: 'Рассчитай площадь семи фигур со схемами и формулами.' } },
   { id: 'color-picker', group: 'react', title: 'Color Picker', technique: 'React · useState', description: { en: 'Choose a colour and see its HEX value.', ru: 'Выбери цвет и узнай его HEX-код.' } },
   { id: 'otp-generator', group: 'react', title: 'OTP Generator', technique: 'React · useEffect', description: { en: 'Generate a six-digit demo code with a countdown.', ru: 'Сгенерируй учебный шестизначный код с обратным отсчётом.' } },
   { id: 'event-rsvp', group: 'react', title: 'Event RSVP', technique: 'React · Forms', description: { en: 'Fill out an event form and preview your response.', ru: 'Заполни форму участия и посмотри подтверждение.' } },

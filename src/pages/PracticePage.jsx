@@ -26,12 +26,12 @@ export const PracticePage = () => {
             {practiceLabs.filter(lab => lab.group === group.id).map(lab => (
               <article className="practice-card" key={lab.id}>
                 <p className="practice-eyebrow">{lab.technique}</p>
-                <h3>{lab.title}</h3>
+                <h3>{lang === 'ru' ? lab.titleRu ?? lab.title : lab.title}</h3>
                 <p className="practice-description">{lab.description[lang]}</p>
                 {lab.href ? (
                   <a className="practice-lab-link" href={lab.href} aria-label={`${open}: ${lab.title}`}>{open}<span aria-hidden="true">↗</span></a>
                 ) : (
-                  <Link className="practice-lab-link" to={`/practice/${lab.id}`} aria-label={`${open}: ${lab.title}`}>{open}<span aria-hidden="true">↗</span></Link>
+                  <Link className="practice-lab-link" to={`/practice/${lab.id}`} aria-label={`${open}: ${lang === 'ru' ? lab.titleRu ?? lab.title : lab.title}`}>{open}<span aria-hidden="true">↗</span></Link>
                 )}
               </article>
             ))}

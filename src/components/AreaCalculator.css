@@ -1,0 +1,29 @@
+.area-calculator { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: var(--space-12); }
+.area-calculator h2 { font-size: var(--text-xl); }
+.area-calculator h3, .area-label, .area-calculator legend { font-size: var(--text-sm); font-weight: 700; }
+.area-label { display: block; margin-bottom: var(--space-3); }
+.area-calculator select, .area-calculator input { width: 100%; min-width: 0; min-height: 48px; padding: var(--space-3); font: inherit; color: var(--color-text); background: var(--color-base); border: 1px solid var(--color-border-strong); border-radius: var(--radius-md); }
+.area-calculator fieldset { min-width: 0; border: 0; padding: 0; margin: var(--space-8) 0 var(--space-6); }
+.area-calculator legend { margin-bottom: var(--space-4); color: var(--color-accent); }
+.area-field + .area-field { margin-top: var(--space-4); }
+.area-field label { display: block; font-size: var(--text-sm); margin-bottom: var(--space-2); }
+.area-field label span { font-family: var(--font-mono); color: var(--color-accent); }
+.area-calculator input[aria-invalid='true'] { border-color: var(--color-error); }
+.area-note { color: var(--color-text-muted); font-size: var(--text-xs); line-height: 1.65; }
+.area-error { color: var(--color-error); font-size: var(--text-sm); margin-top: var(--space-2); }
+.area-visual { min-width: 0; }
+.area-visual figure { margin: var(--space-4) 0; text-align: center; }
+.area-diagram { display: block; width: 100%; max-height: 250px; color: var(--color-accent); }
+.area-outline { stroke: currentColor; fill: var(--color-accent-muted); stroke-width: 2; }
+.area-guide { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.area-angle { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.area-diagram text { fill: var(--color-text); font: 17px var(--font-mono); }
+.area-explanation { font-size: var(--text-sm); color: var(--color-text-muted); }
+.area-formula { margin-top: var(--space-6); padding: var(--space-4); background: var(--color-base); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.area-formula h3, .area-result h3 { color: var(--color-text-muted); margin-bottom: var(--space-2); }
+.area-formula > p { color: var(--color-accent); font-family: var(--font-mono); font-size: var(--text-xl); }
+.area-result { margin-top: var(--space-6); padding-top: var(--space-6); border-top: 1px solid var(--color-border); overflow-wrap: anywhere; }
+.area-substitution { font-family: var(--font-mono); font-size: var(--text-sm); margin-bottom: var(--space-3); }
+.area-answer { color: var(--color-accent); font-size: var(--text-2xl); font-weight: 700; }
+.area-answer span { color: var(--color-text-muted); font-size: var(--text-sm); font-weight: 400; }
+@media (max-width: 760px) { .area-calculator { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); } }

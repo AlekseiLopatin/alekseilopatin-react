@@ -78,6 +78,7 @@ afterEach(() => {
 
 describe('routing', () => {
   it.each([
+    ['Area Calculator', 'area-calculator', '#area-shape'],
     ['Color Picker', 'color-picker', '#color-input'],
     ['OTP Generator', 'otp-generator', '#generate-otp-button'],
     ['Event RSVP', 'event-rsvp', '#rsvp-name'],
@@ -111,7 +112,7 @@ describe('routing', () => {
     expect(
       await screen.findByRole('heading', { name: /practice lab/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /^Open lab:/ })).toHaveLength(6);
+    expect(screen.getAllByRole('link', { name: /^Open lab:/ })).toHaveLength(7);
     expect(screen.getByRole('link', { name: 'Open lab: Music Shopping Cart' })).toHaveAttribute('href', '/practice/music-shopping-cart.html');
     expect(screen.getByRole('link', { name: 'Open lab: Photography Exhibit' })).toHaveAttribute('href', '/practice/photography-exhibit.html');
     expect(screen.queryByRole('button', { name: 'Generate OTP' })).not.toBeInTheDocument();
