@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Raleway:wght@700&display=swap');
+
+:root {
+  color-scheme: dark;
+  --color-base: #141210;
+  --color-surface: #201c18;
+  --color-elevated: #2c2620;
+  --color-accent: #d4a44b;
+  --color-accent-hover: #e8b85c;
+  --color-text: #e8dcc8;
+  --color-muted: #b3a290;
+  --color-border: #3a3020;
+  --font-heading: 'Raleway', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  max-width: 1180px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 64px 32px;
+  background: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+h1, h2, p { margin: 0; }
+h1, h2 { font-family: var(--font-heading); }
+h1 { max-width: 800px; margin-bottom: 36px; font-size: clamp(38px, 6vw, 68px); line-height: 1.12; letter-spacing: -.035em; }
+h1::before { content: 'REFINED EMBER / THE COLLECTION'; display: block; margin-bottom: 20px; color: var(--color-accent); font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .18em; line-height: 1.6; }
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; padding: 24px 0; margin-bottom: 32px; border-block: 1px solid var(--color-border); }
+.buttons button { min-height: 44px; padding: 10px 22px; border: 1px solid var(--color-border); border-radius: 6px; background: var(--color-surface); color: var(--color-muted); font: inherit; font-size: 14px; cursor: pointer; transition: background 200ms ease, color 200ms ease, border-color 200ms ease; }
+.buttons button:hover { color: var(--color-text); border-color: var(--color-accent); }
+.buttons button[aria-pressed='true'] { color: var(--color-base); background: var(--color-accent); border-color: var(--color-accent); font-weight: 600; }
+.buttons button[aria-pressed='true']:hover { background: var(--color-accent-hover); }
+:focus-visible { outline: 2px solid var(--color-accent-hover); outline-offset: 4px; }
+.product-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.item { min-width: 0; display: flex; flex-direction: column; padding: 28px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
+.item-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 32px; }
+.category { color: var(--color-accent); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; }
+.item-mark { color: var(--color-muted); font-family: 'Courier New', monospace; font-size: 12px; }
+.item h2 { font-size: 25px; line-height: 1.25; overflow-wrap: anywhere; }
+.description { margin: 16px 0 28px; color: var(--color-muted); font-size: 13px; line-height: 1.8; overflow-wrap: anywhere; }
+.item-footer { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--color-border); }
+.price-label { color: var(--color-muted); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.price { color: var(--color-accent); font-size: 25px; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+@media (max-width: 1000px) { .product-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  body { padding: 40px 20px; }
+  .product-list { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .buttons { gap: 8px; }
+  .buttons button { padding-inline: 14px; }
+  .item { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .buttons button { transition: none; } }
+
+.practice-back { display: inline-block; margin-bottom: 24px; color: var(--color-accent); font-size: 14px; text-underline-offset: 4px; }

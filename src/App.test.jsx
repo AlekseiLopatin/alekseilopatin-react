@@ -112,7 +112,8 @@ describe('routing', () => {
     expect(
       await screen.findByRole('heading', { name: /practice lab/i, level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getAllByRole('link', { name: /^Open lab:/ })).toHaveLength(7);
+    expect(screen.getAllByRole('link', { name: /^Open lab:/ })).toHaveLength(8);
+    expect(screen.getByRole('link', { name: 'Open lab: Product Showcase' })).toHaveAttribute('href', '/practice/product-showcase/');
     expect(screen.getByRole('link', { name: 'Open lab: Music Shopping Cart' })).toHaveAttribute('href', '/practice/music-shopping-cart.html');
     expect(screen.getByRole('link', { name: 'Open lab: Photography Exhibit' })).toHaveAttribute('href', '/practice/photography-exhibit.html');
     expect(screen.queryByRole('button', { name: 'Generate OTP' })).not.toBeInTheDocument();
