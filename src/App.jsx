@@ -12,6 +12,7 @@ import './App.css';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const PracticePage = lazy(() => import('./pages/PracticePage'));
 const PracticeLabPage = lazy(() => import('./pages/PracticeLabPage'));
+const MathFlashcardsPage = lazy(() => import('./pages/MathFlashcardsPage'));
 const CurrencyPage = lazy(() => import('./pages/CurrencyPage'));
 const GamesPage = lazy(() => import('./pages/GamesPage'));
 const TicTacToePage = lazy(() => import('./pages/TicTacToePage'));
@@ -27,6 +28,7 @@ function App() {
       <ScrollToTop />
       <Suspense fallback={null}>
         <Routes>
+          <Route path="/math-flashcards" element={<MathFlashcardsPage />} />
           <Route element={<ChromeLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/practice" element={<PracticePage />} />

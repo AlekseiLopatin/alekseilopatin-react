@@ -3,6 +3,12 @@
    description хранит оба языка: { en, ru }. */
 
 export const projects = [
+  {
+    id: 'math-flashcards',
+    title: 'Math Flashcards',
+    description: { en: 'Prepare maths decks and teach on screen, with answers, explanations and review.', ru: 'Готовь наборы по математике и показывай задания на уроке с ответами, объяснениями и повторением.' },
+    href: '/math-flashcards', internal: true, image: '/media/math-flashcards.svg', tags: ['React', 'Tool', 'Education'],
+  },
   /* ---------- Внутренние страницы сайта ---------- */
   {
     id: 'currency-converter',
