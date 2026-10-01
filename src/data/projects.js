@@ -1,60 +1,29 @@
-/* Единственный источник правды по проектам.
-   Добавить проект = добавить объект сюда, разметку трогать не надо.
-   description хранит оба языка: { en, ru }. */
+/* Strongest engineering work first; descriptions have EN/RU parity.
+   href is the primary destination; optional sourceHref adds a GitHub action.
+   action: 'source' labels source-only projects; internal routes use 'open'. */
 
 export const projects = [
   {
-    id: 'math-flashcards',
-    title: 'Math Flashcards',
-    description: { en: 'Prepare maths decks and teach on screen, with answers, explanations and review.', ru: 'Готовь наборы по математике и показывай задания на уроке с ответами, объяснениями и повторением.' },
-    href: '/math-flashcards', internal: true, image: '/media/math-flashcards.svg', tags: ['React', 'Tool', 'Education'],
-  },
-  /* ---------- Внутренние страницы сайта ---------- */
-  {
-    id: 'currency-converter',
-    title: 'Currency Converter',
+    id: 'school-portal',
+    title: 'School Portal',
     description: {
-      en: 'Converts between 44 currencies on live rates, with an offline fallback.',
-      ru: 'Конвертирует 44 валюты по живым курсам, с запасной таблицей на случай офлайна.',
+      en: 'Full-stack school platform built with Next.js, TypeScript and Supabase: teacher authentication, grade management, multilingual news and a student art gallery.',
+      ru: 'Школьная платформа на Next.js, TypeScript и Supabase: вход для преподавателей, электронный журнал, новости на трёх языках и галерея ученических работ.',
     },
-    href: '/currency',
-    internal: true,
-    image: '/media/currency.svg',
-    tags: ['React', 'API', 'Tool'],
-  },
-  {
-    id: 'mini-games',
-    title: 'Mini Games',
-    description: {
-      en: 'A shelf of small games: two rebuilt in React, the rest kept as the original vanilla JS.',
-      ru: 'Полка маленьких игр: две переписаны на React, остальные — как есть, на ванильном JS.',
-    },
-    href: '/games',
-    internal: true,
-    image: '/media/mini-games.svg',
-    tags: ['React', 'Game', 'JavaScript'],
-  },
-
-  /* ---------- Новые проекты ---------- */
-  {
-    id: 'thai-buddy',
-    title: 'Thai Buddy',
-    description: {
-      en: 'Gamified Thai-learning app: skill tree, spaced repetition, tone trainer.',
-      ru: 'Геймифицированное приложение для изучения тайского: дерево навыков, интервальные повторения, тренажёр тонов.',
-    },
-    href: 'https://thai-buddy.vercel.app',
-    image: '/media/thai-buddy.webp',
-    tags: ['Next.js', 'TypeScript', 'Supabase'],
+    href: 'https://school.alekseilopatin.com',
+    sourceHref: 'https://github.com/AlekseiLopatin/school-website',
+    image: '/media/school-portal.png',
+    tags: ['Next.js', 'TypeScript', 'Supabase', 'Full-stack'],
   },
   {
     id: 'gradebook-frontend',
     title: 'Mini-Gradebook · Frontend',
     description: {
-      en: 'React + TypeScript client for a full-stack school gradebook.',
-      ru: 'React + TypeScript клиент для школьного электронного журнала.',
+      en: 'React + TypeScript gradebook with a centralized typed API client, student views and per-student summaries from a separate FastAPI backend.',
+      ru: 'Электронный журнал на React и TypeScript: единый типизированный API-клиент, списки учеников и сводки оценок из отдельного бэкенда на FastAPI.',
     },
     href: 'https://gradebook.alekseilopatin.com',
+    sourceHref: 'https://github.com/AlekseiLopatin/school-portal-frontend',
     image: '/media/gradebook-frontend.webp',
     tags: ['React', 'TypeScript', 'Full-stack'],
   },
@@ -62,34 +31,55 @@ export const projects = [
     id: 'gradebook-api',
     title: 'Mini-Gradebook · API',
     description: {
-      en: 'FastAPI + SQLAlchemy + PostgreSQL backend with role-based access.',
-      ru: 'Бэкенд на FastAPI + SQLAlchemy + PostgreSQL с ролевым доступом.',
+      en: 'FastAPI + PostgreSQL backend with JWT authentication, SQLAlchemy/Pydantic models, protected REST endpoints, computed grade summaries and pytest CI.',
+      ru: 'Бэкенд на FastAPI и PostgreSQL: JWT-аутентификация, модели SQLAlchemy/Pydantic, защищённые REST-эндпоинты, расчёт средних оценок и pytest в CI.',
     },
     href: 'https://github.com/AlekseiLopatin/school-portal-api',
+    action: 'source',
     image: '/media/gradebook-api.webp',
     tags: ['Python', 'FastAPI', 'PostgreSQL'],
+  },
+  {
+    id: 'thai-buddy',
+    title: 'Thai Buddy',
+    description: {
+      en: 'Thai-learning app built with Next.js, TypeScript and Supabase: authentication, row-level security, cloud-synced progress, placement testing and spaced repetition.',
+      ru: 'Приложение для изучения тайского на Next.js, TypeScript и Supabase: авторизация, RLS, синхронизация прогресса, определение уровня и интервальное повторение.',
+    },
+    href: 'https://thai-buddy.vercel.app',
+    sourceHref: 'https://github.com/AlekseiLopatin/thai-buddy',
+    image: '/media/thai-buddy.webp',
+    tags: ['Next.js', 'TypeScript', 'Supabase'],
   },
   {
     id: 'macrokin',
     title: 'MacroKin',
     description: {
-      en: 'Meal plans filtered to your macros, with a priced grocery list.',
-      ru: 'Планы питания под ваши макросы и список покупок с ценами.',
+      en: 'Meal-planning app built with Next.js and TypeScript, combining dietary filtering, USDA nutrition data, Supabase and automatic grocery-list generation.',
+      ru: 'Планировщик питания на Next.js и TypeScript: фильтрация по ограничениям в питании, данные USDA, Supabase и автоматическое составление списка покупок.',
     },
     href: 'https://macro-calculated-meals.vercel.app/',
+    sourceHref: 'https://github.com/AlekseiLopatin/macro-calculated-meals',
     image: '/media/macrokin.svg',
     tags: ['TypeScript', 'Next.js', 'API'],
   },
   {
-    id: 'school-portal',
-    title: 'School Portal',
+    id: 'math-flashcards',
+    title: 'Math Flashcards',
+    description: { en: 'Prepare maths decks and teach on screen, with answers, explanations and review.', ru: 'Готовь наборы по математике и показывай задания на уроке с ответами, объяснениями и повторением.' },
+    href: '/math-flashcards', internal: true, image: '/media/math-flashcards.svg', tags: ['React', 'Tool', 'Education'],
+  },
+  {
+    id: 'currency-converter',
+    title: 'Currency Converter',
     description: {
-      en: 'School management portal: timetable, grades, roles.',
-      ru: 'Портал управления школой: расписание, оценки, роли.',
+      en: 'React currency converter with live exchange rates, an accessible searchable combobox, offline fallback and tested network/error states.',
+      ru: 'Конвертер валют на React: актуальные курсы, доступный список валют с поиском, резервные курсы без сети и тесты сетевых ошибок.',
     },
-    href: 'https://school.alekseilopatin.com',
-    image: '/media/studyComputer.webp',
-    tags: ['React', 'API', 'Full-stack'],
+    href: '/currency',
+    internal: true,
+    image: '/media/currency.svg',
+    tags: ['React', 'API', 'Tool'],
   },
   {
     id: 'bookshelf',
@@ -99,6 +89,7 @@ export const projects = [
       ru: 'Django-приложение, превращающее Excel-таблицу в библиотеку с поиском.',
     },
     href: 'https://github.com/AlekseiLopatin/bookshelf',
+    action: 'source',
     image: '/media/bookshelf.webp',
     tags: ['Python', 'Django'],
   },
@@ -110,11 +101,10 @@ export const projects = [
       ru: 'Discord-бот, который разруливает расширенные правила критов прямо за столом.',
     },
     href: 'https://github.com/AlekseiLopatin/dnd-critical-hit-bot',
+    action: 'source',
     image: '/media/dnd-bot.webp',
     tags: ['Python', 'Discord', 'TTRPG'],
   },
-  /* 10-я по счёту: попадает во "Show more", а не на первый экран —
-     это лаборатория упражнений, не отдельный проект. */
   {
     id: 'practice',
     title: 'Practice Lab',
@@ -139,6 +129,18 @@ export const projects = [
     tags: ['React', 'Canvas', 'Tool'],
   },
   {
+    id: 'mini-games',
+    title: 'Mini Games',
+    description: {
+      en: 'A shelf of small games: two rebuilt in React, the rest kept as the original vanilla JS.',
+      ru: 'Полка маленьких игр: две переписаны на React, остальные — как есть, на ванильном JS.',
+    },
+    href: '/games',
+    internal: true,
+    image: '/media/mini-games.svg',
+    tags: ['React', 'Game', 'JavaScript'],
+  },
+  {
     id: 'protect-your-friend',
     title: 'Protect Your Friend',
     description: {
@@ -148,8 +150,6 @@ export const projects = [
     href: 'https://legacy.alekseilopatin.com/protect-your-friend/',
     tags: ['Godot', 'Game'],
   },
-
-  /* ---------- С прежнего сайта ---------- */
   {
     id: 'ember-hunter',
     title: 'Ember Hunter',
@@ -383,6 +383,5 @@ export const projects = [
   },
 ];
 
-/* Теги для фильтра собираются из данных, а не пишутся руками —
-   значит новый тег появляется в фильтре сам. */
+/* Derive filters from data so new tags need no markup changes. */
 export const allTags = [...new Set(projects.flatMap((p) => p.tags))].sort();
