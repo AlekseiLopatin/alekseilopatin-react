@@ -12,6 +12,16 @@
   padding: var(--space-16) var(--space-8);
 }
 
+.app main:has(.developer-intro) {
+  padding-top: var(--space-8);
+}
+
+@media (max-width: 600px) {
+  .app main:has(.developer-intro) {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
 /* Витрина лабораторных: карточки рядом, пока их немного. */
 .lab-grid {
   display: grid;

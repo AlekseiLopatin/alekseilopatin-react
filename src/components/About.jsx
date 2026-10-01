@@ -16,6 +16,10 @@ const stack = [
     id: 'tools',
     items: ['PostgreSQL', 'Supabase', 'Vercel', 'Railway', 'Git', 'Vite'],
   },
+  {
+    id: 'testing',
+    items: ['pytest', 'Vitest', 'React Testing Library', 'Playwright', 'GitHub Actions'],
+  },
 ];
 
 export function About() {

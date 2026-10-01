@@ -13,18 +13,20 @@ export const ProjectCard = ({
   image,
   tags,
   internal,
+  sourceHref,
+  action = internal ? 'open' : 'live',
 }) => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
 
   /* Внутренние страницы открываем через Link (без перезагрузки),
      внешние — обычной ссылкой в новой вкладке. */
-  const Wrapper = internal ? Link : 'a';
+  const PrimaryLink = internal ? Link : 'a';
   const linkProps = internal
     ? { to: href }
     : { href, target: '_blank', rel: 'noopener noreferrer' };
 
   return (
-    <Wrapper className="project-card" {...linkProps}>
+    <article className="project-card">
       <div className="project-media">
         {image ? (
           <img className="project-image" src={image} alt="" loading="lazy" />
@@ -35,22 +37,33 @@ export const ProjectCard = ({
             {title.slice(0, 2).toUpperCase()}
           </div>
         )}
-        <p className="project-overlay">{description[lang]}</p>
       </div>
 
       <div className="project-body">
         <h3 className="project-title">
-          <span className="code">&lt;</span>
+          <span className="code" aria-hidden="true">&lt;</span>
           {title}
-          <span className="code">/&gt;</span>
+          <span className="code" aria-hidden="true">/&gt;</span>
         </h3>
+        <p className="project-description">{description[lang]}</p>
         <ul className="project-tags">
           {tags.map((tag) => (
             <li key={tag}>{tag}</li>
           ))}
         </ul>
+        <div className="project-actions">
+          <PrimaryLink {...linkProps} aria-label={`${t(`projects.${action}`)}: ${title}`}>
+            {t(`projects.${action}`)} <span aria-hidden="true">{internal ? '→' : '↗'}</span>
+          </PrimaryLink>
+          {sourceHref && (
+            <a href={sourceHref} target="_blank" rel="noopener noreferrer"
+              aria-label={`${t('projects.source')}: ${title}`}>
+              {t('projects.source')} <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
       </div>
-    </Wrapper>
+    </article>
   );
 };
 
@@ -81,23 +94,26 @@ export const ProjectsBoard = () => {
           .replace('{total}', projects.length)}
       </p>
 
-      <div
-        className="projects-filter"
-        role="group"
-        aria-label={t('projects.filter')}
-      >
-        {['All', ...allTags].map((tag) => (
-          <button
-            key={tag}
-            type="button"
-            className="filter-button"
-            onClick={() => selectTag(tag)}
-            aria-pressed={activeTag === tag}
-          >
-            {tag === 'All' ? t('projects.all') : tag}
-          </button>
-        ))}
-      </div>
+      <details className="projects-filter-disclosure">
+        <summary>{t('projects.filters')} · {activeTag === 'All' ? t('projects.all') : activeTag}</summary>
+        <div
+          className="projects-filter"
+          role="group"
+          aria-label={t('projects.filter')}
+        >
+          {['All', ...allTags].map((tag) => (
+            <button
+              key={tag}
+              type="button"
+              className="filter-button"
+              onClick={() => selectTag(tag)}
+              aria-pressed={activeTag === tag}
+            >
+              {tag === 'All' ? t('projects.all') : tag}
+            </button>
+          ))}
+        </div>
+      </details>
 
       {visible.length === 0 ? (
         <p className="projects-empty">{t('projects.empty')}</p>

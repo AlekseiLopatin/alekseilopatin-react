@@ -1,3 +1,4 @@
+import { DeveloperIntro } from '../components/DeveloperIntro';
 import { ProjectsBoard } from '../components/ProjectsBoard';
 import { About } from '../components/About';
 import { Contact } from '../components/Contact';
@@ -10,6 +11,7 @@ export const HomePage = () => {
   return (
     <>
       <PageMeta title={t('meta.home.title')} description={t('meta.home.desc')} />
+      <DeveloperIntro />
       <section id="projects">
         <ProjectsBoard />
       </section>

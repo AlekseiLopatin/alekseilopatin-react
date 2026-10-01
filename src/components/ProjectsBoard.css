@@ -7,11 +7,11 @@
 }
 
 .projects-heading {
-  text-align: center;
+  text-align: left;
 }
 
 .projects-subheading {
-  text-align: center;
+  text-align: left;
   color: var(--color-text-faint);
   font-size: var(--text-sm);
   margin-top: var(--space-2);
@@ -23,7 +23,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-2);
-  margin: var(--space-8) 0 var(--space-12);
+  margin-top: var(--space-4);
 }
 
 .filter-button {
@@ -57,7 +57,7 @@
 /* --- Сетка --- */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   /* 1fr вместо auto: все ряды одной высоты, даже если
      где-то заголовок переносится на вторую строку. */
   grid-auto-rows: 1fr;
@@ -120,26 +120,38 @@
   );
 }
 
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-6);
-  text-align: center;
+.project-description {
   font-size: var(--text-sm);
-  font-weight: 300;
-  color: var(--color-text);
-  background: var(--color-base);
-  opacity: 0;
-  transition: opacity var(--transition);
+  color: var(--color-text-muted);
 }
 
-/* Описание показывается и по ховеру, и по фокусу с клавиатуры. */
-.project-card:hover .project-overlay,
-.project-card:focus-visible .project-overlay {
-  opacity: 0.96;
+.projects-filter-disclosure {
+  margin: var(--space-4) 0 var(--space-6);
+}
+
+.projects-filter-disclosure summary {
+  width: fit-content;
+  cursor: pointer;
+  padding: var(--space-2) 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.project-actions a {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.project-card:focus-within {
+  border-color: var(--color-focus);
 }
 
 /* --- Подпись --- */

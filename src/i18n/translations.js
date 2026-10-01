@@ -23,7 +23,7 @@ export const translations = {
 
     'meta.home.title': 'Aleksei Lopatin — Full-stack developer',
     'meta.home.desc':
-      'Projects, React labs and contacts. React, TypeScript, FastAPI and Python.',
+      'Full-stack developer building web applications with React, Next.js, TypeScript, Python, FastAPI and PostgreSQL. Explore deployed projects and source code.',
     'meta.practice.title': 'Practice Lab — Aleksei Lopatin',
     'meta.practice.desc':
       'Small React exercises: colour picker, OTP generator with a countdown, and an RSVP form.',
@@ -50,13 +50,13 @@ export const translations = {
     'notFound.legacy': 'Open site v1',
 
     'about.heading': 'About',
-    'about.lead': 'Developer by passion, teacher by profession.',
+    'about.lead':
+      'Full-stack developer building and deploying web applications with React, Next.js, TypeScript, Python, FastAPI and PostgreSQL.',
     'about.p1':
-      'I build full-stack web applications and small tools that solve real problems. The school-management portal started as something my own classroom needed; the gradebook behind it is a React + FastAPI + PostgreSQL app I shipped end to end, from the database schema to the deployed domain.',
+      'I build products end to end — from database schemas and APIs to frontend interfaces, authentication, testing and deployment. My recent work includes a React + FastAPI gradebook, a multilingual school platform, a Thai-learning application and a data-driven meal-planning app.',
     'about.p2':
-      'I teach maths when I am not writing code, and that shows in what I build: most of my projects come from a problem I actually had, not from a tutorial. I care about clean code, honest UX, and shipping things people use.',
-    'about.open':
-      'Open to full-stack and back-end engineering roles — remote or relocation.',
+      'Before focusing on software development, I worked for roughly four years as a data analyst at Knoema, using Python, SQL, data processing and quantitative analysis. I currently teach mathematics and computer science, which is where several of my education projects originated.',
+    'about.open': 'Open to full-stack, frontend and Python backend engineering roles — in Thailand, remote, or with relocation.',
     'about.stack.languages': 'Languages',
     'about.stack.frameworks': 'Frameworks',
     'about.stack.tools': 'Tools & platforms',
@@ -105,6 +105,16 @@ export const translations = {
     'footer.source': 'Source of this site',
     'footer.built': 'Built with React, Vite and react-router.',
     'footer.rights': 'All rights reserved.',
+    'hero.name': 'Aleksei Lopatin',
+    'hero.role': 'Full-Stack Developer',
+    'hero.intro': 'I build and deploy full-stack web applications, from React interfaces to Python APIs and relational databases.',
+    'hero.projects': 'View projects',
+    'hero.contact': 'Contact',
+    'projects.open': 'Open',
+    'projects.live': 'Live',
+    'projects.source': 'GitHub',
+    'projects.filters': 'Filter projects',
+    'about.stack.testing': 'Testing & CI',
   },
 
   ru: {
@@ -128,7 +138,7 @@ export const translations = {
 
     'meta.home.title': 'Aleksei Lopatin — full-stack разработчик',
     'meta.home.desc':
-      'Проекты, лаборатория React и контакты. React, TypeScript, FastAPI и Python.',
+      'Full-stack разработчик: React, Next.js, TypeScript, Python, FastAPI и PostgreSQL. Веб-приложения, работающие проекты и исходный код.',
     'meta.practice.title': 'Практика — Aleksei Lopatin',
     'meta.practice.desc':
       'Маленькие упражнения на React: выбор цвета, генератор OTP с отсчётом и форма RSVP.',
@@ -155,13 +165,13 @@ export const translations = {
     'notFound.legacy': 'Открыть сайт v1',
 
     'about.heading': 'Обо мне',
-    'about.lead': 'Разработчик по призванию, учитель по профессии.',
+    'about.lead':
+      'Full-stack разработчик. Создаю и развёртываю веб-приложения на React, Next.js, TypeScript, Python, FastAPI и PostgreSQL.',
     'about.p1':
-      'Делаю веб-приложения и небольшие инструменты, которые решают настоящие задачи. Школьный портал вырос из того, чего не хватало моему собственному классу, а электронный журнал за ним — это React + FastAPI + PostgreSQL, доведённый мной от схемы базы до задеплоенного домена.',
+      'Работаю над всем приложением: от схемы базы данных и API до интерфейса, авторизации, тестирования и развёртывания. Среди недавних проектов — электронный журнал на React и FastAPI, многоязычный школьный портал, приложение для изучения тайского и планировщик питания на основе данных о продуктах.',
     'about.p2':
-      'Когда не пишу код, преподаю математику, и это заметно по проектам: почти каждый вырос из задачи, с которой я реально столкнулся, а не из туториала. Ценю чистый код, честный интерфейс и то, чем в итоге пользуются люди.',
-    'about.open':
-      'Открыт к позициям full-stack и back-end — удалённо или с релокацией.',
+      'До того как сосредоточиться на разработке, около четырёх лет работал аналитиком данных в Knoema: использовал Python и SQL, занимался обработкой данных и количественным анализом. Сейчас преподаю математику и информатику — из этой практики выросли несколько моих образовательных проектов.',
+    'about.open': 'Рассматриваю позиции full-stack, frontend и Python backend разработчика — в Таиланде, удалённо или с релокацией.',
     'about.stack.languages': 'Языки',
     'about.stack.frameworks': 'Фреймворки',
     'about.stack.tools': 'Инструменты',
@@ -210,5 +220,15 @@ export const translations = {
     'footer.source': 'Исходники этого сайта',
     'footer.built': 'Сделано на React, Vite и react-router.',
     'footer.rights': 'Все права защищены.',
+    'hero.name': 'Алексей Лопатин',
+    'hero.role': 'Full-stack разработчик',
+    'hero.intro': 'Создаю и развёртываю веб-приложения — от интерфейсов на React до API на Python и реляционных баз данных.',
+    'hero.projects': 'Смотреть проекты',
+    'hero.contact': 'Связаться',
+    'projects.open': 'Открыть',
+    'projects.live': 'Сайт',
+    'projects.source': 'GitHub',
+    'projects.filters': 'Фильтр проектов',
+    'about.stack.testing': 'Тестирование и CI',
   },
 };
