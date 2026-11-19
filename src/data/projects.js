@@ -64,6 +64,11 @@ export const projects = [
     tags: ['TypeScript', 'Next.js', 'API'],
   },
   {
+    id: 'math-buddy', title: 'Math Buddy',
+    description: { en: 'Classroom maths practice with heroes, XP and cosmetic rewards. Fractions, decimals and percentages.', ru: 'Математика для всего класса: герои, опыт и награды. Дроби, десятичные числа и проценты.' },
+    href: '/math-buddy', internal: true, image: '/media/math-buddy.svg', tags: ['React', 'Tool', 'Education'],
+  },
+  {
     id: 'math-flashcards',
     title: 'Math Flashcards',
     description: { en: 'Prepare maths decks and teach on screen, with answers, explanations and review.', ru: 'Готовь наборы по математике и показывай задания на уроке с ответами, объяснениями и повторением.' },
