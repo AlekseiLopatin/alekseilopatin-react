@@ -15,7 +15,7 @@ describe('ProjectsBoard', () => {
     expect(cards()).toHaveLength(9);
     expect(cards().map(card => within(card).getByRole('heading').textContent.replace(/^<|\/>$/g, ''))).toEqual([
       'School Portal', 'Mini-Gradebook · Frontend', 'Mini-Gradebook · API',
-      'Thai Buddy', 'MacroKin', 'Math Flashcards', 'Currency Converter', 'Bookshelf', 'D&D Critical Hit Bot',
+      'Thai Buddy', 'MacroKin', 'Math Buddy', 'Math Flashcards', 'Currency Converter', 'Bookshelf',
     ]);
     expect(
       screen.getByRole('button', { name: /show \d+ more/i }),
