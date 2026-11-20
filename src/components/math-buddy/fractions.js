@@ -68,6 +68,11 @@ function operationPool(topic, tier) {
         if(tier==='medium') allowed=cancellations===1;
         if(tier==='hard') allowed=cancellations===2 && b1>=6 && b2>=6;
         if(tier==='impossible') allowed=cancellations===2 && b1>=10 && b2>=10 && a1>=3 && a2>=3 && cross1!==cross2;
+        // Check the remaining factors, not just how many cancellations occurred.
+        if (allowed && (tier==='hard' || tier==='impossible')) {
+          const remaining = topic==='mul' ? [a1/cross1,a2/cross2,b1/cross2,b2/cross1] : [a1/cross1,b2/cross2,b1/cross2,a2/cross1];
+          allowed = remaining.every(value => value > 1);
+        }
       }
       if(allowed){ const factor=gcd(n,d); pool.push({a1,b1,a2,b2,simN:n/factor,simD:d/factor}); }
     }
